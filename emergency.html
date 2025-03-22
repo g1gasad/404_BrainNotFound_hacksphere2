@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Support - MaterCare</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .emergency-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-sm);
+        }
+
+        .emergency-header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            color: var(--danger-color);
+        }
+
+        .emergency-header h1 {
+            color: var(--danger-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .emergency-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .emergency-card {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .emergency-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .emergency-card.primary {
+            border-top: 3px solid var(--danger-color);
+        }
+
+        .emergency-card.secondary {
+            border-top: 3px solid var(--primary-color);
+        }
+
+        .emergency-card.tertiary {
+            border-top: 3px solid var(--tertiary-color);
+        }
+
+        .emergency-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(232, 95, 92, 0.1);
+            border-radius: var(--radius-rounded);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-sm);
+            font-size: 2.4rem;
+            color: var(--danger-color);
+        }
+
+        .emergency-card.secondary .emergency-icon {
+            background-color: rgba(92, 158, 173, 0.1);
+            color: var(--primary-color);
+        }
+
+        .emergency-card.tertiary .emergency-icon {
+            background-color: rgba(123, 109, 141, 0.1);
+            color: var(--tertiary-color);
+        }
+
+        .emergency-card h3 {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .emergency-card p {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-color);
+        }
+
+        .emergency-number {
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--danger-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .map-container {
+            height: 400px;
+            margin-bottom: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .facility-list {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            box-shadow: var(--shadow);
+        }
+
+        .facility-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .facility-header h2 {
+            margin: 0;
+        }
+
+        .facility-filters {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .facility-filter {
+            padding: 8px 16px;
+            border: 1px solid var(--gray-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .facility-filter.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .facility-item {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--gray-color);
+        }
+
+        .facility-item:last-child {
+            border-bottom: none;
+        }
+
+        .facility-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(92, 158, 173, 0.1);
+            border-radius: var(--radius-rounded);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-md);
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+
+        .facility-info {
+            flex: 1;
+        }
+
+        .facility-info h3 {
+            margin: 0 0 5px;
+        }
+
+        .facility-info p {
+            margin: 0;
+            color: var(--tertiary-color);
+        }
+
+        .facility-distance {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .facility-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .facility-btn {
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .facility-btn.primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .facility-btn.outline {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background-color: transparent;
+        }
+
+        .emergency-tips {
+            background-color: rgba(232, 95, 92, 0.1);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .emergency-tips h2 {
+            color: var(--danger-color);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .tips-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+        }
+
+        .tip-icon {
+            color: var(--danger-color);
+            font-size: 2rem;
+        }
+
+        .tip-content h4 {
+            margin: 0 0 5px;
+            color: var(--danger-color);
+        }
+
+        .tip-content p {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        @media (max-width: 768px) {
+            .facility-header {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            .facility-filters {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: var(--spacing-xs);
+            }
+
+            .facility-item {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--spacing-sm);
+            }
+
+            .facility-icon {
+                margin: 0 auto;
+            }
+
+            .facility-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .facility-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MaterCare Logo">
+                <h1>MaterCare</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <div class="language-selector">
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="fr">Français</option>
+                </select>
+            </div>
+            <div class="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Emergency Support Section -->
+    <section class="emergency-section">
+        <div class="emergency-container">
+            <div class="emergency-header">
+                <h1>Emergency Support</h1>
+                <p>Get immediate assistance during pregnancy-related emergencies</p>
+            </div>
+
+            <div class="emergency-actions">
+                <div class="emergency-card primary">
+                    <div class="emergency-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Emergency Helpline</h3>
+                    <p>24/7 maternal healthcare emergency support</p>
+                    <div class="emergency-number">108</div>
+                    <button class="btn btn-danger" onclick="window.location.href='tel:108'">
+                        <i class="fas fa-phone-alt"></i> Call Now
+                    </button>
+                </div>
+
+                <div class="emergency-card secondary">
+                    <div class="emergency-icon">
+                        <i class="fas fa-ambulance"></i>
+                    </div>
+                    <h3>Ambulance Service</h3>
+                    <p>Request immediate medical transportation</p>
+                    <div class="emergency-number">102</div>
+                    <button class="btn btn-primary" onclick="window.location.href='tel:102'">
+                        <i class="fas fa-ambulance"></i> Request Ambulance
+                    </button>
+                </div>
+
+                <div class="emergency-card tertiary">
+                    <div class="emergency-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>WhatsApp Support</h3>
+                    <p>Chat with healthcare professionals</p>
+                    <div class="emergency-number">+91 XXXXX XXXXX</div>
+                    <button class="btn btn-tertiary" onclick="window.location.href='https://wa.me/91XXXXXXXXXX'">
+                        <i class="fab fa-whatsapp"></i> Chat Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+
+            <div class="facility-list">
+                <div class="facility-header">
+                    <h2>Nearby Healthcare Facilities</h2>
+                    <div class="facility-filters">
+                        <div class="facility-filter active">All</div>
+                        <div class="facility-filter">Hospitals</div>
+                        <div class="facility-filter">Clinics</div>
+                        <div class="facility-filter">Pharmacies</div>
+                    </div>
+                </div>
+
+                <div class="facility-item">
+                    <div class="facility-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <div class="facility-info">
+                        <h3>City General Hospital</h3>
+                        <p>123 Healthcare Avenue, City Center</p>
+                    </div>
+                    <div class="facility-distance">1.2 km</div>
+                    <div class="facility-actions">
+                        <button class="facility-btn primary">
+                            <i class="fas fa-directions"></i> Get Directions
+                        </button>
+                        <button class="facility-btn outline">
+                            <i class="fas fa-phone"></i> Call
+                        </button>
+                    </div>
+                </div>
+
+                <div class="facility-item">
+                    <div class="facility-icon">
+                        <i class="fas fa-clinic-medical"></i>
+                    </div>
+                    <div class="facility-info">
+                        <h3>Mother Care Clinic</h3>
+                        <p>456 Medical Lane, Suburb Area</p>
+                    </div>
+                    <div class="facility-distance">2.5 km</div>
+                    <div class="facility-actions">
+                        <button class="facility-btn primary">
+                            <i class="fas fa-directions"></i> Get Directions
+                        </button>
+                        <button class="facility-btn outline">
+                            <i class="fas fa-phone"></i> Call
+                        </button>
+                    </div>
+                </div>
+
+                <div class="facility-item">
+                    <div class="facility-icon">
+                        <i class="fas fa-prescription-bottle-medical"></i>
+                    </div>
+                    <div class="facility-info">
+                        <h3>24/7 Medical Pharmacy</h3>
+                        <p>789 Health Street, Downtown</p>
+                    </div>
+                    <div class="facility-distance">0.8 km</div>
+                    <div class="facility-actions">
+                        <button class="facility-btn primary">
+                            <i class="fas fa-directions"></i> Get Directions
+                        </button>
+                        <button class="facility-btn outline">
+                            <i class="fas fa-phone"></i> Call
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="emergency-tips">
+                <h2>Emergency Guidelines</h2>
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <div class="tip-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="tip-content">
+                            <h4>Recognize Warning Signs</h4>
+                            <p>Severe headache, blurred vision, or excessive bleeding require immediate medical attention.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="tip-content">
+                            <h4>Stay Calm</h4>
+                            <p>Take deep breaths and try to remain calm while seeking help.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-icon">
+                            <i class="fas fa-file-medical"></i>
+                        </div>
+                        <div class="tip-content">
+                            <h4>Keep Documents Ready</h4>
+                            <p>Have your medical records and insurance information easily accessible.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="tip-content">
+                            <h4>Emergency Contacts</h4>
+                            <p>Keep a list of emergency contacts including your doctor and family members.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="MaterCare Logo">
+                    <h3>MaterCare</h3>
+                    <p>Bridging the gap in maternal healthcare</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Support</a></li>
+                        <li><a href="health-tracker.html">Health Tracking</a></li>
+                        <li><a href="consultation.html">Consultation</a></li>
+                        <li><a href="resources.html">Educational Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope"></i> info@matercare.org</p>
+                    <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MaterCare. All rights reserved.</p>
+                <div class="footer-policies">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <script>
+        // Initialize Google Maps
+        function initMap() {
+            // Default location (can be updated with user's location)
+            const defaultLocation = { lat: 20.5937, lng: 78.9629 };
+
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 13,
+                center: defaultLocation,
+            });
+
+            // Try to get user's current location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+
+                        // Center map on user's location
+                        map.setCenter(userLocation);
+
+                        // Add marker for user's location
+                        new google.maps.Marker({
+                            position: userLocation,
+                            map: map,
+                            title: 'Your Location',
+                            icon: {
+                                url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                            }
+                        });
+
+                        // Search for nearby healthcare facilities
+                        searchNearbyFacilities(map, userLocation);
+                    },
+                    () => {
+                        // Handle geolocation error
+                        console.log('Error: The Geolocation service failed.');
+                    }
+                );
+            }
+        }
+
+        // Search for nearby healthcare facilities
+        function searchNearbyFacilities(map, location) {
+            const service = new google.maps.places.PlacesService(map);
+            
+            service.nearbySearch({
+                location: location,
+                radius: 5000, // 5km radius
+                type: ['hospital', 'doctor', 'pharmacy']
+            }, (results, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    results.forEach(place => {
+                        new google.maps.Marker({
+                            map: map,
+                            position: place.geometry.location,
+                            title: place.name
+                        });
+                    });
+                }
+            });
+        }
+
+        // Facility filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filters = document.querySelectorAll('.facility-filter');
+            
+            filters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    filters.forEach(f => f.classList.remove('active'));
+                    this.classList.add('active');
+                    // In a real application, this would filter the facilities list
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

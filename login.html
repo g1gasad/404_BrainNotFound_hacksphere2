@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MaterCare</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .login-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-sm);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .login-header h1 {
+            color: var(--primary-color);
+        }
+        
+        .login-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .login-tab {
+            padding: var(--spacing-sm) var(--spacing-md);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .login-tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .login-forms {
+            max-width: 450px;
+            margin: 0 auto;
+            background-color: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+        
+        .login-form {
+            display: none;
+        }
+        
+        .login-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 1.2rem;
+            border: 1px solid var(--gray-color);
+            border-radius: var(--radius-md);
+            font-family: var(--body-font);
+            font-size: 1.6rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--spacing-md);
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: var(--spacing-xs);
+        }
+        
+        .forgot-password {
+            color: var(--tertiary-color);
+        }
+        
+        .login-button {
+            width: 100%;
+            padding: 1.2rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--body-font);
+            font-size: 1.6rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: var(--spacing-md);
+        }
+        
+        .login-button:hover {
+            background-color: #4A8D9B;
+        }
+        
+        .login-divider {
+            text-align: center;
+            margin: var(--spacing-md) 0;
+            position: relative;
+        }
+        
+        .login-divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background-color: var(--gray-color);
+        }
+        
+        .login-divider::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background-color: var(--gray-color);
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .social-login-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 4.5rem;
+            height: 4.5rem;
+            border-radius: var(--radius-rounded);
+            color: white;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .google {
+            background-color: #DB4437;
+        }
+        
+        .facebook {
+            background-color: #4267B2;
+        }
+        
+        .twitter {
+            background-color: #1DA1F2;
+        }
+        
+        .social-login-button:hover {
+            transform: translateY(-3px);
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: var(--spacing-md);
+        }
+        
+        .otp-container {
+            display: none;
+            margin-top: var(--spacing-md);
+        }
+        
+        .otp-fields {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .otp-field {
+            width: 5rem;
+            height: 5rem;
+            text-align: center;
+            font-size: 2rem;
+            border: 1px solid var(--gray-color);
+            border-radius: var(--radius-md);
+        }
+        
+        .resend-otp {
+            text-align: center;
+            margin-top: var(--spacing-sm);
+        }
+        
+        .tab-icon {
+            margin-right: var(--spacing-xs);
+        }
+        
+        /* Form customization based on user type */
+        #doctor-form {
+            border-top: 3px solid var(--secondary-color);
+        }
+        
+        #pregnant-form {
+            border-top: 3px solid var(--primary-color);
+        }
+        
+        #ngo-form {
+            border-top: 3px solid var(--tertiary-color);
+        }
+        
+        #volunteer-form {
+            border-top: 3px solid var(--danger-color);
+        }
+        
+        @media (max-width: 768px) {
+            .login-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .login-tab {
+                flex: 1 0 40%;
+                text-align: center;
+                margin-bottom: var(--spacing-xs);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .login-forms {
+                padding: var(--spacing-md);
+            }
+            
+            .form-footer {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                align-items: flex-start;
+            }
+            
+            .otp-field {
+                width: 4rem;
+                height: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MaterCare Logo">
+                <h1>MaterCare</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline active">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <div class="language-selector">
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="fr">Français</option>
+                </select>
+            </div>
+            <div class="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <section class="login-section">
+        <div class="login-container">
+            <div class="login-header">
+                <h1>Login to Your Account</h1>
+                <p>Access your MaterCare account to manage your health data and appointments</p>
+            </div>
+            
+            <div class="login-tabs">
+                <div class="login-tab active" data-tab="pregnant">
+                    <i class="fas fa-female tab-icon"></i> Pregnant Women
+                </div>
+                <div class="login-tab" data-tab="doctor">
+                    <i class="fas fa-user-md tab-icon"></i> Doctors
+                </div>
+                <div class="login-tab" data-tab="ngo">
+                    <i class="fas fa-hands-helping tab-icon"></i> NGOs
+                </div>
+                <div class="login-tab" data-tab="volunteer">
+                    <i class="fas fa-heart tab-icon"></i> Volunteers
+                </div>
+            </div>
+            
+            <div class="login-forms">
+                <!-- Pregnant Women Login Form -->
+                <form id="pregnant-form" class="login-form active">
+                    <div class="form-group">
+                        <label for="pregnant-email">Email or Phone Number</label>
+                        <input type="text" id="pregnant-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pregnant-password">Password</label>
+                        <input type="password" id="pregnant-password" required>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <div class="remember-me">
+                            <input type="checkbox" id="pregnant-remember">
+                            <label for="pregnant-remember">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="button" class="login-button" id="pregnant-login-btn">Login</button>
+                    
+                    <div class="otp-container" id="pregnant-otp">
+                        <p>We've sent a verification code to your email/phone. Please enter it below:</p>
+                        <div class="otp-fields">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                        </div>
+                        <button type="submit" class="login-button">Verify & Login</button>
+                        <div class="resend-otp">
+                            <a href="#">Resend Code</a>
+                        </div>
+                    </div>
+                    
+                    <div class="login-divider">OR</div>
+                    
+                    <div class="social-login">
+                        <a href="#" class="social-login-button google"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-login-button facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-login-button twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    
+                    <div class="register-link">
+                        <p>Don't have an account? <a href="register.html">Register Now</a></p>
+                    </div>
+                </form>
+                
+                <!-- Doctors Login Form -->
+                <form id="doctor-form" class="login-form">
+                    <div class="form-group">
+                        <label for="doctor-email">Email</label>
+                        <input type="email" id="doctor-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="doctor-password">Password</label>
+                        <input type="password" id="doctor-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="doctor-license">Medical License ID</label>
+                        <input type="text" id="doctor-license" required>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <div class="remember-me">
+                            <input type="checkbox" id="doctor-remember">
+                            <label for="doctor-remember">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="button" class="login-button" id="doctor-login-btn">Login</button>
+                    
+                    <div class="otp-container" id="doctor-otp">
+                        <p>We've sent a verification code to your email. Please enter it below:</p>
+                        <div class="otp-fields">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                        </div>
+                        <button type="submit" class="login-button">Verify & Login</button>
+                        <div class="resend-otp">
+                            <a href="#">Resend Code</a>
+                        </div>
+                    </div>
+                    
+                    <div class="register-link">
+                        <p>Don't have an account? <a href="register.html">Register as a Doctor</a></p>
+                    </div>
+                </form>
+                
+                <!-- NGO Login Form -->
+                <form id="ngo-form" class="login-form">
+                    <div class="form-group">
+                        <label for="ngo-email">Organization Email</label>
+                        <input type="email" id="ngo-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ngo-password">Password</label>
+                        <input type="password" id="ngo-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ngo-id">NGO Registration ID</label>
+                        <input type="text" id="ngo-id" required>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <div class="remember-me">
+                            <input type="checkbox" id="ngo-remember">
+                            <label for="ngo-remember">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="button" class="login-button" id="ngo-login-btn">Login</button>
+                    
+                    <div class="otp-container" id="ngo-otp">
+                        <p>We've sent a verification code to your email. Please enter it below:</p>
+                        <div class="otp-fields">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                        </div>
+                        <button type="submit" class="login-button">Verify & Login</button>
+                        <div class="resend-otp">
+                            <a href="#">Resend Code</a>
+                        </div>
+                    </div>
+                    
+                    <div class="register-link">
+                        <p>Don't have an account? <a href="register.html">Register Your NGO</a></p>
+                    </div>
+                </form>
+                
+                <!-- Volunteer Login Form -->
+                <form id="volunteer-form" class="login-form">
+                    <div class="form-group">
+                        <label for="volunteer-email">Email</label>
+                        <input type="email" id="volunteer-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-password">Password</label>
+                        <input type="password" id="volunteer-password" required>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <div class="remember-me">
+                            <input type="checkbox" id="volunteer-remember">
+                            <label for="volunteer-remember">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="button" class="login-button" id="volunteer-login-btn">Login</button>
+                    
+                    <div class="otp-container" id="volunteer-otp">
+                        <p>We've sent a verification code to your email. Please enter it below:</p>
+                        <div class="otp-fields">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                            <input type="text" class="otp-field" maxlength="1">
+                        </div>
+                        <button type="submit" class="login-button">Verify & Login</button>
+                        <div class="resend-otp">
+                            <a href="#">Resend Code</a>
+                        </div>
+                    </div>
+                    
+                    <div class="login-divider">OR</div>
+                    
+                    <div class="social-login">
+                        <a href="#" class="social-login-button google"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-login-button facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-login-button twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    
+                    <div class="register-link">
+                        <p>Don't have an account? <a href="register.html">Register as a Volunteer</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="MaterCare Logo">
+                    <h3>MaterCare</h3>
+                    <p>Bridging the gap in maternal healthcare</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Support</a></li>
+                        <li><a href="health-tracker.html">Health Tracking</a></li>
+                        <li><a href="consultation.html">Consultation</a></li>
+                        <li><a href="resources.html">Educational Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope"></i> info@matercare.org</p>
+                    <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MaterCare. All rights reserved.</p>
+                <div class="footer-policies">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.login-tab');
+            const forms = document.querySelectorAll('.login-form');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const target = this.dataset.tab;
+                    
+                    // Remove active class from all tabs and forms
+                    tabs.forEach(t => t.classList.remove('active'));
+                    forms.forEach(f => f.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding form
+                    this.classList.add('active');
+                    document.getElementById(`${target}-form`).classList.add('active');
+                });
+            });
+            
+            // OTP verification handling for each user type
+            ['pregnant', 'doctor', 'ngo', 'volunteer'].forEach(userType => {
+                const loginBtn = document.getElementById(`${userType}-login-btn`);
+                if (loginBtn) {
+                    loginBtn.addEventListener('click', function() {
+                        const emailField = document.getElementById(`${userType}-email`);
+                        const passwordField = document.getElementById(`${userType}-password`);
+                        
+                        // Simple validation
+                        if (emailField.value.trim() === '' || passwordField.value.trim() === '') {
+                            alert('Please enter both email/phone and password');
+                            return;
+                        }
+                        
+                        // Show OTP container
+                        document.getElementById(`${userType}-otp`).style.display = 'block';
+                        this.style.display = 'none';
+                    });
+                }
+            });
+            
+            // OTP field auto-tab functionality
+            const otpFields = document.querySelectorAll('.otp-field');
+            otpFields.forEach((field, index) => {
+                field.addEventListener('input', function() {
+                    if (this.value.length === 1 && index < otpFields.length - 1) {
+                        otpFields[index + 1].focus();
+                    }
+                });
+                
+                field.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && this.value === '' && index > 0) {
+                        otpFields[index - 1].focus();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

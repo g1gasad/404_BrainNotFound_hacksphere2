@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Tracker - MaterCare</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .dashboard-sidebar {
+            background-color: white;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            padding: var(--spacing-md);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            padding-bottom: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--gray-color);
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-rounded);
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-right: var(--spacing-sm);
+        }
+        
+        .user-info h3 {
+            margin: 0;
+            font-size: 1.6rem;
+        }
+        
+        .user-info p {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--tertiary-color);
+        }
+        
+        .sidebar-menu {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-sm);
+            color: var(--dark-color);
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-menu a i {
+            margin-right: var(--spacing-sm);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .sidebar-menu a.active, .sidebar-menu a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .dashboard-content {
+            padding: var(--spacing-md);
+            background-color: #f9f9f9;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .dashboard-header h2 {
+            margin: 0;
+        }
+        
+        .notification-bell {
+            position: relative;
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            cursor: pointer;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger-color);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: var(--radius-rounded);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .dashboard-card {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            box-shadow: var(--shadow);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(92, 158, 173, 0.1);
+            border-radius: var(--radius-rounded);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.6rem;
+        }
+        
+        .card-content {
+            text-align: center;
+        }
+        
+        .card-value {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .card-label {
+            color: var(--tertiary-color);
+            font-size: 1.4rem;
+        }
+        
+        .dashboard-card.warning .card-value {
+            color: var(--danger-color);
+        }
+        
+        .dashboard-card.good .card-value {
+            color: #28a745;
+        }
+        
+        .dashboard-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .chart-container {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            box-shadow: var(--shadow);
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .chart-header h3 {
+            margin: 0;
+        }
+        
+        .chart-period {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+        
+        .chart-period button {
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chart-period button.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .appointment-list, .medical-records {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            box-shadow: var(--shadow);
+        }
+        
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .list-header h3 {
+            margin: 0;
+        }
+        
+        .view-all {
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .view-all:hover {
+            text-decoration: underline;
+        }
+        
+        .appointment-item {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--gray-color);
+        }
+        
+        .appointment-item:last-child {
+            border-bottom: none;
+        }
+        
+        .appointment-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(92, 158, 173, 0.1);
+            border-radius: var(--radius-rounded);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            margin-right: var(--spacing-sm);
+        }
+        
+        .appointment-details {
+            flex: 1;
+        }
+        
+        .appointment-details h4 {
+            margin: 0 0 5px;
+            font-size: 1.6rem;
+        }
+        
+        .appointment-time {
+            display: flex;
+            align-items: center;
+            color: var(--tertiary-color);
+            font-size: 1.2rem;
+        }
+        
+        .appointment-time i {
+            margin-right: 5px;
+        }
+        
+        .appointment-status {
+            padding: 5px 10px;
+            border-radius: var(--radius-sm);
+            font-size: 1.2rem;
+        }
+        
+        .status-upcoming {
+            background-color: rgba(92, 158, 173, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .status-completed {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+        
+        .upload-section {
+            margin-top: var(--spacing-md);
+        }
+        
+        .upload-btn {
+            background-color: rgba(92, 158, 173, 0.1);
+            color: var(--primary-color);
+            border: 2px dashed var(--primary-color);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-sm);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-btn:hover {
+            background-color: rgba(92, 158, 173, 0.2);
+        }
+        
+        .upload-btn i {
+            font-size: 2.4rem;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .upload-btn p {
+            margin: 0;
+        }
+        
+        .file-list {
+            margin-top: var(--spacing-sm);
+        }
+        
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-xs) 0;
+            border-bottom: 1px solid var(--gray-color);
+        }
+        
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        
+        .file-icon {
+            width: 30px;
+            height: 30px;
+            background-color: rgba(92, 158, 173, 0.1);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            margin-right: var(--spacing-xs);
+        }
+        
+        .file-name {
+            flex: 1;
+            font-size: 1.4rem;
+        }
+        
+        .file-date {
+            color: var(--tertiary-color);
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 992px) {
+            .dashboard-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-sidebar {
+                display: none;
+            }
+            
+            .mobile-sidebar-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MaterCare Logo">
+                <h1>MaterCare</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <span class="user-name">Priya S.</span>
+                <a href="index.html" class="btn btn-outline">Logout</a>
+            </div>
+            <div class="language-selector">
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="fr">Français</option>
+                </select>
+            </div>
+            <div class="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard-section">
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            <div class="dashboard-sidebar">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <h3>Priya Sharma</h3>
+                        <p>28 Weeks Pregnant</p>
+                    </div>
+                </div>
+                
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                    <li><a href="#"><i class="fas fa-file-medical"></i> Medical Records</a></li>
+                    <li><a href="#"><i class="fas fa-heartbeat"></i> Health Metrics</a></li>
+                    <li><a href="#"><i class="fas fa-calendar-alt"></i> Due Date Calculator</a></li>
+                    <li><a href="#"><i class="fas fa-utensils"></i> Nutrition Tracker</a></li>
+                    <li><a href="#"><i class="fas fa-bell"></i> Reminders</a></li>
+                    <li><a href="#"><i class="fas fa-book-medical"></i> Pregnancy Journal</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> Help & Support</a></li>
+                </ul>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="dashboard-content">
+                <div class="dashboard-header">
+                    <h2>Health Tracking Dashboard</h2>
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                </div>
+                
+                <!-- Health Stats Cards -->
+                <div class="dashboard-cards">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Weight</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-weight"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-value">68 kg</div>
+                            <div class="card-label">Last updated: Yesterday</div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card warning">
+                        <div class="card-header">
+                            <h3>Blood Pressure</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-value">130/85</div>
+                            <div class="card-label">Slightly elevated</div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card good">
+                        <div class="card-header">
+                            <h3>Hemoglobin</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-value">11.5 g/dL</div>
+                            <div class="card-label">Normal range</div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card good">
+                        <div class="card-header">
+                            <h3>Blood Sugar</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-cookie"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-value">92 mg/dL</div>
+                            <div class="card-label">Normal range</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charts Row -->
+                <div class="dashboard-row">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Weight Progression</h3>
+                            <div class="chart-period">
+                                <button class="active">Week</button>
+                                <button>Month</button>
+                                <button>Trimester</button>
+                            </div>
+                        </div>
+                        <canvas id="weightChart" height="250"></canvas>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Blood Pressure History</h3>
+                            <div class="chart-period">
+                                <button class="active">Week</button>
+                                <button>Month</button>
+                                <button>Trimester</button>
+                            </div>
+                        </div>
+                        <canvas id="bpChart" height="250"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Appointments and Medical Records -->
+                <div class="dashboard-row">
+                    <div class="appointment-list">
+                        <div class="list-header">
+                            <h3>Upcoming Appointments</h3>
+                            <a href="#" class="view-all">View All</a>
+                        </div>
+                        
+                        <div class="appointment-item">
+                            <div class="appointment-icon">
+                                <i class="fas fa-stethoscope"></i>
+                            </div>
+                            <div class="appointment-details">
+                                <h4>Prenatal Checkup</h4>
+                                <div class="appointment-time">
+                                    <i class="far fa-calendar-alt"></i> 28 March, 2023 at 10:30 AM
+                                </div>
+                            </div>
+                            <span class="appointment-status status-upcoming">Upcoming</span>
+                        </div>
+                        
+                        <div class="appointment-item">
+                            <div class="appointment-icon">
+                                <i class="fas fa-notes-medical"></i>
+                            </div>
+                            <div class="appointment-details">
+                                <h4>Blood Test</h4>
+                                <div class="appointment-time">
+                                    <i class="far fa-calendar-alt"></i> 5 April, 2023 at 9:00 AM
+                                </div>
+                            </div>
+                            <span class="appointment-status status-upcoming">Upcoming</span>
+                        </div>
+                        
+                        <div class="appointment-item">
+                            <div class="appointment-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="appointment-details">
+                                <h4>Consultation with Dr. Desai</h4>
+                                <div class="appointment-time">
+                                    <i class="far fa-calendar-alt"></i> 15 March, 2023 at 2:00 PM
+                                </div>
+                            </div>
+                            <span class="appointment-status status-completed">Completed</span>
+                        </div>
+                    </div>
+                    
+                    <div class="medical-records">
+                        <div class="list-header">
+                            <h3>Medical Records</h3>
+                            <a href="#" class="view-all">View All</a>
+                        </div>
+                        
+                        <div class="upload-section">
+                            <div class="upload-btn" id="uploadBtn">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Click to upload blood reports or medical documents</p>
+                                <input type="file" id="fileUpload" style="display:none;">
+                            </div>
+                            
+                            <div class="file-list">
+                                <div class="file-item">
+                                    <div class="file-icon">
+                                        <i class="fas fa-file-medical"></i>
+                                    </div>
+                                    <div class="file-name">Blood_Test_Report_Feb.pdf</div>
+                                    <div class="file-date">25 Feb, 2023</div>
+                                </div>
+                                
+                                <div class="file-item">
+                                    <div class="file-icon">
+                                        <i class="fas fa-file-image"></i>
+                                    </div>
+                                    <div class="file-name">Ultrasound_Scan_Week24.jpg</div>
+                                    <div class="file-date">10 Feb, 2023</div>
+                                </div>
+                                
+                                <div class="file-item">
+                                    <div class="file-icon">
+                                        <i class="fas fa-file-medical"></i>
+                                    </div>
+                                    <div class="file-name">Glucose_Tolerance_Test.pdf</div>
+                                    <div class="file-date">15 Jan, 2023</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Weight Progression Chart
+            const weightCtx = document.getElementById('weightChart').getContext('2d');
+            const weightChart = new Chart(weightCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 22', 'Week 23', 'Week 24', 'Week 25', 'Week 26', 'Week 27', 'Week 28'],
+                    datasets: [{
+                        label: 'Weight (kg)',
+                        data: [62, 63, 64, 65, 66, 67, 68],
+                        backgroundColor: 'rgba(92, 158, 173, 0.1)',
+                        borderColor: 'rgba(92, 158, 173, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(92, 158, 173, 1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 60,
+                            max: 75
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+            
+            // Blood Pressure Chart
+            const bpCtx = document.getElementById('bpChart').getContext('2d');
+            const bpChart = new Chart(bpCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 22', 'Week 23', 'Week 24', 'Week 25', 'Week 26', 'Week 27', 'Week 28'],
+                    datasets: [
+                        {
+                            label: 'Systolic',
+                            data: [118, 120, 122, 125, 128, 130, 130],
+                            backgroundColor: 'rgba(227, 151, 116, 0.1)',
+                            borderColor: 'rgba(227, 151, 116, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(227, 151, 116, 1)',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Diastolic',
+                            data: [75, 76, 78, 80, 82, 84, 85],
+                            backgroundColor: 'rgba(123, 109, 141, 0.1)',
+                            borderColor: 'rgba(123, 109, 141, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(123, 109, 141, 1)',
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 70,
+                            max: 140
+                        }
+                    }
+                }
+            });
+            
+            // Chart period buttons
+            document.querySelectorAll('.chart-period button').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons in the same group
+                    this.parentNode.querySelectorAll('button').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // In a real application, this would update the chart data based on the selected period
+                });
+            });
+            
+            // Upload button functionality
+            const uploadBtn = document.getElementById('uploadBtn');
+            const fileUpload = document.getElementById('fileUpload');
+            
+            uploadBtn.addEventListener('click', function() {
+                fileUpload.click();
+            });
+            
+            fileUpload.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    // In a real application, this would upload the file to the server
+                    // For demo, we'll just show an alert
+                    alert(`File "${this.files[0].name}" selected for upload. In a real application, this would be uploaded to the server.`);
+                    
+                    // Add the file to the list
+                    const fileList = document.querySelector('.file-list');
+                    const currentDate = new Date();
+                    const dateString = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'short' })}, ${currentDate.getFullYear()}`;
+                    
+                    const fileItem = document.createElement('div');
+                    fileItem.className = 'file-item';
+                    fileItem.innerHTML = `
+                        <div class="file-icon">
+                            <i class="fas fa-file"></i>
+                        </div>
+                        <div class="file-name">${this.files[0].name}</div>
+                        <div class="file-date">${dateString}</div>
+                    `;
+                    
+                    fileList.insertBefore(fileItem, fileList.firstChild);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaterCare - Maternal Healthcare Platform</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MaterCare Logo">
+                <h1>MaterCare</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <div class="language-selector">
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="fr">Français</option>
+                </select>
+            </div>
+            <div class="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Bridging the Gap in Maternal Healthcare</h1>
+                <p>Empowering underprivileged communities with accessible prenatal and emergency care services</p>
+                <div class="hero-buttons">
+                    <a href="#emergency" class="btn btn-danger">Emergency Support</a>
+                    <a href="#tracking" class="btn btn-secondary">Health Tracking</a>
+                    <a href="#resources" class="btn btn-tertiary">Educational Resources</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/hero-image.jpg" alt="Mother and healthcare professional">
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access Section -->
+    <section class="quick-access" id="emergency">
+        <div class="container">
+            <h2>Quick Access</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-ambulance"></i>
+                    </div>
+                    <h3>Emergency Support</h3>
+                    <p>Get immediate help from nearby hospitals and healthcare professionals</p>
+                    <a href="emergency.html" class="btn btn-danger">Get Help Now</a>
+                </div>
+                <div class="card" id="tracking">
+                    <div class="card-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Health Tracking</h3>
+                    <p>Monitor your pregnancy journey with our easy-to-use health tracker</p>
+                    <a href="health-tracker.html" class="btn btn-secondary">Track Health</a>
+                </div>
+                <div class="card" id="resources">
+                    <div class="card-icon">
+                        <i class="fas fa-book-medical"></i>
+                    </div>
+                    <h3>Educational Resources</h3>
+                    <p>Access vital information about maternal care, nutrition, and more</p>
+                    <a href="resources.html" class="btn btn-tertiary">Learn More</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Consultation</h3>
+                    <p>Schedule appointments with specialized healthcare professionals</p>
+                    <a href="consultation.html" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <h2>About MaterCare</h2>
+                <p>MaterCare is dedicated to improving maternal health outcomes in underprivileged communities through technology, education, and accessible healthcare services.</p>
+                <p>Our platform connects pregnant women with healthcare professionals, NGOs, and volunteers to ensure safe pregnancies and childbirth experiences.</p>
+                <a href="about.html" class="btn btn-outline">Learn More About Us</a>
+            </div>
+            <div class="about-image">
+                <img src="images/about-image.jpg" alt="Community healthcare worker with pregnant women">
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>Success Stories</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <div class="testimonial-image">
+                        <img src="images/testimonial-1.jpg" alt="Beneficiary">
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"MaterCare's platform helped me access critical prenatal care during my pregnancy. The health tracking feature reminded me of important checkups, and the educational resources were invaluable."</p>
+                        <h4>Priya Sharma</h4>
+                        <p class="testimonial-meta">Mother of two, Rural Maharashtra</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-image">
+                        <img src="images/testimonial-2.jpg" alt="Healthcare Professional">
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"As a doctor serving rural communities, MaterCare has helped me reach and monitor patients who would otherwise have limited access to proper maternal care. The platform bridges crucial healthcare gaps."</p>
+                        <h4>Dr. Anita Desai</h4>
+                        <p class="testimonial-meta">OB-GYN, Community Health Center</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-image">
+                        <img src="images/testimonial-3.jpg" alt="NGO Partner">
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"Our NGO has been able to coordinate emergency responses more efficiently with MaterCare's platform. The location-based services help us identify and support pregnant women in remote areas."</p>
+                        <h4>Rajiv Mehta</h4>
+                        <p class="testimonial-meta">Director, Health For All NGO</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-controls">
+                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Expert Consultation</h3>
+                    <p>Connect with qualified healthcare professionals for prenatal guidance and support</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Health Monitoring</h3>
+                    <p>Track vital health metrics throughout your pregnancy journey</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Nearby Facilities</h3>
+                    <p>Find healthcare facilities near you with our location-based services</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Automated Reminders</h3>
+                    <p>Never miss important checkups with our timely notification system</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Chatbot</h3>
+                    <p>Get instant answers to common pregnancy-related questions</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Educational Content</h3>
+                    <p>Access informative videos, articles, and guides on maternal health</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Join MaterCare Today</h2>
+                <p>Be part of our mission to improve maternal healthcare accessibility for all</p>
+                <div class="cta-buttons">
+                    <a href="register.html" class="btn btn-primary">Register Now</a>
+                    <a href="volunteer.html" class="btn btn-outline">Volunteer With Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="MaterCare Logo">
+                    <h3>MaterCare</h3>
+                    <p>Bridging the gap in maternal healthcare</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Support</a></li>
+                        <li><a href="health-tracker.html">Health Tracking</a></li>
+                        <li><a href="consultation.html">Consultation</a></li>
+                        <li><a href="resources.html">Educational Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope"></i> info@matercare.org</p>
+                    <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MaterCare. All rights reserved.</p>
+                <div class="footer-policies">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html> 
