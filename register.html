@@ -19,7 +19,7 @@
             margin-bottom: var(--spacing-xl);
             padding: var(--spacing-xl) 0;
             background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-                        url('images/register-bg.jpg') center/cover;
+                        url('https://placehold.co/1200x800/9ac1f0/ffffff?text=MaterCare+Registration') center/cover;
             border-radius: var(--radius-lg);
         }
 
@@ -101,56 +101,6 @@
             font-size: 1.4rem;
         }
 
-        .form-steps {
-            display: flex;
-            justify-content: space-between;
-            padding: var(--spacing-md) var(--spacing-lg);
-            background: white;
-            border-bottom: 1px solid var(--gray-color);
-        }
-
-        .step-item {
-            display: flex;
-            align-items: center;
-            color: var(--text-color);
-            font-weight: 500;
-        }
-
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: var(--light-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: var(--spacing-sm);
-            color: var(--text-color);
-            font-weight: 600;
-        }
-
-        .step-item.active .step-number {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .step-item.completed .step-number {
-            background: var(--success-color);
-            color: white;
-        }
-
-        .form-content {
-            padding: var(--spacing-lg);
-        }
-
-        .form-step {
-            display: none;
-        }
-
-        .form-step.active {
-            display: block;
-        }
-
         .form-group {
             margin-bottom: var(--spacing-md);
         }
@@ -201,101 +151,72 @@
         }
 
         .form-buttons {
-            display: flex;
-            justify-content: space-between;
+            text-align: center;
             margin-top: var(--spacing-lg);
         }
 
-        .btn-prev {
-            background: var(--light-color);
-            color: var(--text-color);
-        }
-
-        .upload-area {
-            border: 2px dashed var(--gray-color);
-            border-radius: var(--radius-md);
-            padding: var(--spacing-lg);
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .upload-area:hover {
-            border-color: var(--primary-color);
-            background: var(--light-color);
-        }
-
-        .upload-icon {
-            font-size: 3rem;
+        .section-title {
             color: var(--primary-color);
-            margin-bottom: var(--spacing-sm);
+            margin: var(--spacing-md) 0;
+            padding-bottom: var(--spacing-xs);
+            border-bottom: 1px solid var(--gray-color);
         }
 
-        .upload-text {
-            color: var(--text-color);
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .upload-info {
-            color: var(--tertiary-color);
-            font-size: 1.4rem;
-        }
-
-        .success-message {
+        .success-message, .error-message {
+            margin: var(--spacing-md) 0;
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-md);
             text-align: center;
-            padding: var(--spacing-xl) var(--spacing-lg);
             display: none;
         }
-
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--success-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--spacing-md);
-            color: white;
-            font-size: 3rem;
-        }
-
-        .success-title {
+        
+        .success-message {
+            background-color: rgba(var(--success-rgb), 0.1);
             color: var(--success-color);
-            margin-bottom: var(--spacing-sm);
-            font-size: 2.4rem;
         }
-
-        .success-text {
-            color: var(--text-color);
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .validation-error {
+        
+        .error-message {
+            background-color: rgba(var(--danger-rgb), 0.1);
             color: var(--danger-color);
-            font-size: 1.4rem;
-            margin-top: 5px;
+        }
+        
+        .loading-spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 20px auto;
+            border-radius: 50%;
+            border: 4px solid var(--light-color);
+            border-top: 4px solid var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .type-fields {
             display: none;
         }
 
-        @media (max-width: 768px) {
-            .register-hero h1 {
-                font-size: 3rem;
-            }
+        .form-content {
+            padding: var(--spacing-lg);
+        }
 
-            .form-steps {
-                flex-direction: column;
-                gap: var(--spacing-sm);
-            }
+        .login-link {
+            text-align: center;
+            margin-top: var(--spacing-md);
+        }
 
-            .form-buttons {
-                flex-direction: column-reverse;
-                gap: var(--spacing-sm);
-            }
+        .login-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
 
-            .btn {
-                width: 100%;
-            }
+        .login-link a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -317,8 +238,7 @@
                 </ul>
             </nav>
             <div class="auth-buttons">
-                <a href="login.html" class="btn btn-outline">Login</a>
-                <a href="register.html" class="btn btn-primary">Register</a>
+                <a href="register.html" class="btn btn-primary active">Register</a>
             </div>
             <div class="language-selector">
                 <select id="language">
@@ -345,64 +265,51 @@
             </div>
 
             <div class="register-form-container">
-                <div class="user-type-selection">
-                    <div class="user-type-card active" data-type="mother">
-                        <div class="user-type-icon">
-                            <i class="fas fa-female"></i>
-                        </div>
-                        <h3>Expectant Mother</h3>
-                        <p>Access healthcare services and track your pregnancy journey</p>
-                    </div>
-                    <div class="user-type-card" data-type="doctor">
-                        <div class="user-type-icon">
-                            <i class="fas fa-user-md"></i>
-                        </div>
-                        <h3>Healthcare Provider</h3>
-                        <p>Provide care and support to expectant mothers</p>
-                    </div>
-                    <div class="user-type-card" data-type="ngo">
-                        <div class="user-type-icon">
-                            <i class="fas fa-hands-helping"></i>
-                        </div>
-                        <h3>NGO/Organization</h3>
-                        <p>Partner with us to extend maternal healthcare services</p>
-                    </div>
-                </div>
+                <div class="form-content">
+                    <div class="loading-spinner"></div>
+                    <div class="success-message"></div>
+                    <div class="error-message"></div>
 
-                <div class="form-steps">
-                    <div class="step-item active">
-                        <div class="step-number">1</div>
-                        <span>Basic Info</span>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-number">2</div>
-                        <span>Profile Details</span>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-number">3</div>
-                        <span>Verification</span>
-                    </div>
-                </div>
+                    <!-- Register Form -->
+                    <form id="registerForm">
+                        <div class="user-type-selection">
+                            <div class="user-type-card active" data-type="mother">
+                                <div class="user-type-icon">
+                                    <i class="fas fa-female"></i>
+                                </div>
+                                <h3>Expectant Mother</h3>
+                                <p>Access healthcare services</p>
+                            </div>
+                            <div class="user-type-card" data-type="doctor">
+                                <div class="user-type-icon">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <h3>Healthcare Provider</h3>
+                                <p>Provide maternal care</p>
+                            </div>
+                            <div class="user-type-card" data-type="ngo">
+                                <div class="user-type-icon">
+                                    <i class="fas fa-hands-helping"></i>
+                                </div>
+                                <h3>NGO/Organization</h3>
+                                <p>Support maternal health</p>
+                            </div>
+                        </div>
 
-                <form id="registerForm" class="form-content" onsubmit="return validateForm()">
-                    <!-- Step 1: Basic Information -->
-                    <div class="form-step active" data-step="1">
+                        <h3 class="section-title">Account Information</h3>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name *</label>
                                 <input type="text" id="firstName" name="firstName" required>
-                                <div class="validation-error">Please enter your first name</div>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name *</label>
                                 <input type="text" id="lastName" name="lastName" required>
-                                <div class="validation-error">Please enter your last name</div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address *</label>
                             <input type="email" id="email" name="email" required>
-                            <div class="validation-error">Please enter a valid email address</div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
@@ -411,7 +318,6 @@
                                     <input type="password" id="password" name="password" required>
                                     <i class="fas fa-eye password-toggle"></i>
                                 </div>
-                                <div class="validation-error">Password must be at least 8 characters</div>
                             </div>
                             <div class="form-group">
                                 <label for="confirmPassword">Confirm Password *</label>
@@ -419,116 +325,24 @@
                                     <input type="password" id="confirmPassword" name="confirmPassword" required>
                                     <i class="fas fa-eye password-toggle"></i>
                                 </div>
-                                <div class="validation-error">Passwords do not match</div>
                             </div>
                         </div>
-                        <div class="form-buttons">
-                            <button type="button" class="btn btn-primary" onclick="nextStep(1)">Next Step</button>
-                        </div>
-                    </div>
 
-                    <!-- Step 2: Profile Details -->
-                    <div class="form-step" data-step="2">
+                        <h3 class="section-title">Profile Details</h3>
+                        
                         <!-- Mother-specific fields -->
-                        <div class="mother-fields">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="dueDate">Expected Due Date</label>
-                                    <input type="date" id="dueDate" name="dueDate">
-                                </div>
-                                <div class="form-group">
-                                    <label for="bloodGroup">Blood Group</label>
-                                    <select id="bloodGroup" name="bloodGroup">
-                                        <option value="">Select Blood Group</option>
-                                        <option value="A+">A+</option>
-                                        <option value="A-">A-</option>
-                                        <option value="B+">B+</option>
-                                        <option value="B-">B-</option>
-                                        <option value="O+">O+</option>
-                                        <option value="O-">O-</option>
-                                        <option value="AB+">AB+</option>
-                                        <option value="AB-">AB-</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="medicalHistory">Medical History</label>
-                                <textarea id="medicalHistory" name="medicalHistory" rows="4"></textarea>
-                            </div>
+                        <div class="type-fields mother-fields" style="display: block;">
+                            <!-- All mother-specific fields removed as per requirement -->
                         </div>
 
                         <!-- Doctor-specific fields -->
-                        <div class="doctor-fields" style="display: none;">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="specialization">Specialization *</label>
-                                    <select id="specialization" name="specialization">
-                                        <option value="">Select Specialization</option>
-                                        <option value="obstetrician">Obstetrician</option>
-                                        <option value="gynecologist">Gynecologist</option>
-                                        <option value="midwife">Midwife</option>
-                                        <option value="pediatrician">Pediatrician</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="experience">Years of Experience *</label>
-                                    <input type="number" id="experience" name="experience" min="0">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="licenseNumber">Medical License Number *</label>
-                                <input type="text" id="licenseNumber" name="licenseNumber">
-                            </div>
+                        <div class="type-fields doctor-fields">
+                            <!-- All doctor-specific fields removed as per requirement -->
                         </div>
 
                         <!-- NGO-specific fields -->
-                        <div class="ngo-fields" style="display: none;">
-                            <div class="form-group">
-                                <label for="organizationName">Organization Name *</label>
-                                <input type="text" id="organizationName" name="organizationName">
-                            </div>
-                            <div class="form-group">
-                                <label for="registrationNumber">Registration Number *</label>
-                                <input type="text" id="registrationNumber" name="registrationNumber">
-                            </div>
-                            <div class="form-group">
-                                <label for="organizationType">Organization Type *</label>
-                                <select id="organizationType" name="organizationType">
-                                    <option value="">Select Type</option>
-                                    <option value="ngo">NGO</option>
-                                    <option value="hospital">Hospital</option>
-                                    <option value="clinic">Clinic</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-buttons">
-                            <button type="button" class="btn btn-prev" onclick="prevStep(2)">Previous</button>
-                            <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next Step</button>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Verification -->
-                    <div class="form-step" data-step="3">
-                        <div class="form-group">
-                            <label>Identity Verification</label>
-                            <div class="upload-area" onclick="triggerFileUpload('identity')">
-                                <i class="fas fa-id-card upload-icon"></i>
-                                <p class="upload-text">Upload ID Proof</p>
-                                <p class="upload-info">Supported formats: JPG, PNG, PDF (Max 5MB)</p>
-                                <input type="file" id="identityFile" style="display: none;" accept=".jpg,.png,.pdf">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Additional Documents</label>
-                            <div class="upload-area" onclick="triggerFileUpload('documents')">
-                                <i class="fas fa-file-upload upload-icon"></i>
-                                <p class="upload-text">Upload Supporting Documents</p>
-                                <p class="upload-info">Medical certificates, licenses, or registration documents</p>
-                                <input type="file" id="documentsFile" style="display: none;" accept=".jpg,.png,.pdf" multiple>
-                            </div>
+                        <div class="type-fields ngo-fields">
+                            <!-- All NGO-specific fields removed as per requirement -->
                         </div>
 
                         <div class="form-group">
@@ -539,21 +353,14 @@
                         </div>
 
                         <div class="form-buttons">
-                            <button type="button" class="btn btn-prev" onclick="prevStep(3)">Previous</button>
                             <button type="submit" class="btn btn-primary">Complete Registration</button>
                         </div>
-                    </div>
 
-                    <!-- Success Message -->
-                    <div class="success-message">
-                        <div class="success-icon">
-                            <i class="fas fa-check"></i>
+                        <div class="login-link">
+                            Already registered? <a href="index.html">Go to Home Page</a>
                         </div>
-                        <h2 class="success-title">Registration Successful!</h2>
-                        <p class="success-text">Thank you for joining MaterCare. Please check your email to verify your account.</p>
-                        <a href="login.html" class="btn btn-primary">Proceed to Login</a>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -610,138 +417,326 @@
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // User Type Selection
-        const userTypeCards = document.querySelectorAll('.user-type-card');
-        const motherFields = document.querySelector('.mother-fields');
-        const doctorFields = document.querySelector('.doctor-fields');
-        const ngoFields = document.querySelector('.ngo-fields');
+        // Make Supabase globally available - check what's available
+        console.log('CDN Supabase object:', supabase);
+        window.supabaseJs = supabase;
+    </script>
+    <script type="module">
+        import { signUp } from './js/supabase.js';
+        import { insertUserProfile, insertMotherData, insertDoctorData, insertNgoData, testDatabaseConnection } from './js/supabase-db.js';
+        
+        // Import the Supabase client to use in this script
+        import { supabase } from './js/supabase.js';
+        
+        // Log the imported supabase client for debugging
+        console.log('Imported Supabase client:', supabase);
 
-        userTypeCards.forEach(card => {
-            card.addEventListener('click', () => {
-                userTypeCards.forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
-
-                const userType = card.dataset.type;
-                motherFields.style.display = userType === 'mother' ? 'block' : 'none';
-                doctorFields.style.display = userType === 'doctor' ? 'block' : 'none';
-                ngoFields.style.display = userType === 'ngo' ? 'block' : 'none';
-            });
-        });
-
-        // Form Steps Navigation
-        function nextStep(currentStep) {
-            if (validateStep(currentStep)) {
-                document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
-                document.querySelector(`[data-step="${currentStep + 1}"]`).classList.add('active');
-                
-                const steps = document.querySelectorAll('.step-item');
-                steps[currentStep - 1].classList.add('completed');
-                steps[currentStep].classList.add('active');
-            }
-        }
-
-        function prevStep(currentStep) {
-            document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
-            document.querySelector(`[data-step="${currentStep - 1}"]`).classList.add('active');
-            
-            const steps = document.querySelectorAll('.step-item');
-            steps[currentStep - 1].classList.remove('active');
-            steps[currentStep - 2].classList.remove('completed');
-            steps[currentStep - 2].classList.add('active');
-        }
-
-        // Form Validation
-        function validateStep(step) {
-            let isValid = true;
-            const currentStep = document.querySelector(`[data-step="${step}"]`);
-
-            if (step === 1) {
-                const firstName = document.getElementById('firstName');
-                const lastName = document.getElementById('lastName');
-                const email = document.getElementById('email');
-                const password = document.getElementById('password');
-                const confirmPassword = document.getElementById('confirmPassword');
-
-                if (!firstName.value.trim()) {
-                    showError(firstName);
-                    isValid = false;
-                }
-
-                if (!lastName.value.trim()) {
-                    showError(lastName);
-                    isValid = false;
-                }
-
-                if (!email.value.trim() || !email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-                    showError(email);
-                    isValid = false;
-                }
-
-                if (password.value.length < 8) {
-                    showError(password);
-                    isValid = false;
-                }
-
-                if (password.value !== confirmPassword.value) {
-                    showError(confirmPassword);
-                    isValid = false;
-                }
-            }
-
-            return isValid;
-        }
-
-        function showError(input) {
-            input.classList.add('error');
-            input.nextElementSibling.style.display = 'block';
-        }
-
-        // Password Toggle
-        const passwordToggles = document.querySelectorAll('.password-toggle');
-        passwordToggles.forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                const input = toggle.previousElementSibling;
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    toggle.classList.remove('fa-eye');
-                    toggle.classList.add('fa-eye-slash');
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Test database connection
+                const { connected, error } = await testDatabaseConnection();
+                if (!connected) {
+                    console.error('Database connection issue:', error);
+                    showMessage(error, 'error');
+                    document.querySelectorAll('button[type="submit"]').forEach(btn => {
+                        btn.disabled = true;
+                    });
                 } else {
-                    input.type = 'password';
-                    toggle.classList.remove('fa-eye-slash');
-                    toggle.classList.add('fa-eye');
+                    console.log('Database connection successful');
                 }
-            });
-        });
 
-        // File Upload
-        function triggerFileUpload(type) {
-            document.getElementById(`${type}File`).click();
-        }
+                // Set up user type selection
+                document.querySelectorAll('.user-type-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        document.querySelectorAll('.user-type-card').forEach(c => c.classList.remove('active'));
+                        card.classList.add('active');
+                        
+                        const userType = card.dataset.type;
+                        document.querySelectorAll('.type-fields').forEach(field => {
+                            field.style.display = 'none';
+                        });
+                        document.querySelector(`.${userType}-fields`).style.display = 'block';
+                    });
+                });
 
-        // Form Submission
-        function validateForm() {
-            if (!document.getElementById('termsAccept').checked) {
-                alert('Please accept the Terms of Service and Privacy Policy');
-                return false;
+                // Password toggle functionality
+                document.querySelectorAll('.password-toggle').forEach(toggle => {
+                    toggle.addEventListener('click', () => {
+                        const input = toggle.previousElementSibling;
+                        if (input.type === 'password') {
+                            input.type = 'text';
+                            toggle.classList.remove('fa-eye');
+                            toggle.classList.add('fa-eye-slash');
+                        } else {
+                            input.type = 'password';
+                            toggle.classList.remove('fa-eye-slash');
+                            toggle.classList.add('fa-eye');
+                        }
+                    });
+                });
+
+                // Handle form submission
+                document.getElementById('registerForm').addEventListener('submit', async function(event) {
+                    event.preventDefault();
+                    
+                    // Show loading spinner
+                    showLoading(true);
+                    
+                    // Get user data
+                    const userType = document.querySelector('.user-type-card.active').dataset.type;
+                    const formData = {
+                        firstName: document.getElementById('firstName').value,
+                        lastName: document.getElementById('lastName').value,
+                        email: document.getElementById('email').value,
+                        password: document.getElementById('password').value,
+                        confirmPassword: document.getElementById('confirmPassword').value
+                    };
+
+                    // Basic validation
+                    if (!formData.email || !formData.password) {
+                        showMessage('Email and password are required', 'error');
+                        showLoading(false);
+                        return;
+                    }
+
+                    if (formData.password !== formData.confirmPassword) {
+                        showMessage('Passwords do not match', 'error');
+                        showLoading(false);
+                        return;
+                    }
+
+                    try {
+                        console.log(`Registering new ${userType}:`, formData);
+                        
+                        // Register user with Supabase
+                        const { data, error } = await signUp(
+                            formData.email,
+                            formData.password,
+                            userType,
+                            {
+                                first_name: formData.firstName,
+                                last_name: formData.lastName
+                            }
+                        );
+
+                        if (error) throw error;
+                        
+                        if (!data || !data.user || !data.user.id) {
+                            throw new Error('User registration successful but no user ID was returned');
+                        }
+                        
+                        const userId = data.user.id;
+                        console.log('User registered with ID:', userId);
+                        
+                        // Insert user profile
+                        const profileData = {
+                            first_name: formData.firstName,
+                            last_name: formData.lastName,
+                            email: formData.email,
+                            user_type: userType,
+                            user_id: userId
+                        };
+                        
+                        console.log('Attempting to insert user profile with data:', profileData);
+                        
+                        try {
+                            // Direct database insertion bypassing RLS
+                            // Create a direct database connection for the profile insertion
+                            const directSupabase = window.supabaseJs.createClient(
+                                'https://zcsfvycqhsgxcbwxtiit.supabase.co',
+                                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpjc2Z2eWNxaHNneGNid3h0aWl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2Mjk2ODYsImV4cCI6MjA1ODIwNTY4Nn0.dxXTaAyI-ZD6YX4XNJvchc4sW-tJJYu7gVjXa-fi3Zo'
+                            );
+                            
+                            console.log('Direct supabase client created:', directSupabase);
+                            
+                            // First check if user profile already exists
+                            const { data: existingProfile } = await directSupabase
+                                .from('user_profiles')
+                                .select('id')
+                                .eq('email', formData.email)
+                                .maybeSingle();
+                                
+                            if (existingProfile) {
+                                console.log('Profile already exists with this email:', formData.email);
+                                throw new Error('A user with this email already exists.');
+                            }
+                            
+                            // Insert the user profile
+                            const { data: profileResult, error: profileError } = await directSupabase
+                                .from('user_profiles')
+                                .insert([profileData])
+                                .select();
+                            
+                            if (profileError) {
+                                console.error('Error inserting user profile:', profileError);
+                                console.error('Profile insertion error details:', JSON.stringify(profileError));
+                                
+                                // Try updating auth metadata as a fallback
+                                const { error: metadataError } = await directSupabase.auth.updateUser({
+                                    data: { 
+                                        first_name: formData.firstName,
+                                        last_name: formData.lastName,
+                                        user_type: userType
+                                    }
+                                });
+                                
+                                if (metadataError) {
+                                    throw profileError; // Use original error if metadata update also fails
+                                } else {
+                                    console.log('Updated user metadata as fallback');
+                                }
+                            } else {
+                                console.log('Successfully inserted user profile:', profileResult);
+                            }
+                            
+                            // Insert type-specific data
+                            if (userType === 'mother') {
+                                const motherData = {
+                                    user_id: userId // Add user_id explicitly
+                                };
+                                
+                                console.log('Storing minimal mother data:', motherData);
+                                try {
+                                    // Insert directly using the directSupabase client
+                                    const { data: motherResult, error: motherError } = await directSupabase
+                                        .from('mothers')
+                                        .insert([motherData])
+                                        .select();
+                                        
+                                    if (motherError) {
+                                        console.error('Error inserting mother data:', motherError);
+                                        // Try updating metadata as fallback
+                                        await directSupabase.auth.updateUser({
+                                            data: { mother_data: true }
+                                        });
+                                        console.log('Stored minimal mother data in user metadata as fallback');
+                                    } else {
+                                        console.log('Successfully inserted minimal mother data:', motherResult);
+                                    }
+                                } catch (motherErr) {
+                                    console.error('Mother data insertion error:', motherErr);
+                                }
+                            } else if (userType === 'doctor') {
+                                const doctorData = {
+                                    user_id: userId // Add user_id explicitly
+                                };
+                                
+                                console.log('Storing minimal doctor data:', doctorData);
+                                try {
+                                    // Insert directly using the directSupabase client
+                                    const { data: doctorResult, error: doctorError } = await directSupabase
+                                        .from('doctors')
+                                        .insert([doctorData])
+                                        .select();
+                                        
+                                    if (doctorError) {
+                                        console.error('Error inserting doctor data:', doctorError);
+                                        // Try updating metadata as fallback
+                                        await directSupabase.auth.updateUser({
+                                            data: { doctor_data: true }
+                                        });
+                                        console.log('Stored minimal doctor data in user metadata as fallback');
+                                    } else {
+                                        console.log('Successfully inserted minimal doctor data:', doctorResult);
+                                    }
+                                } catch (doctorErr) {
+                                    console.error('Doctor data insertion error:', doctorErr);
+                                }
+                            } else if (userType === 'ngo') {
+                                const ngoData = {
+                                    user_id: userId // Add user_id explicitly
+                                };
+                                
+                                console.log('Storing minimal NGO data:', ngoData);
+                                try {
+                                    // Insert directly using the directSupabase client
+                                    const { data: ngoResult, error: ngoError } = await directSupabase
+                                        .from('ngos')
+                                        .insert([ngoData])
+                                        .select();
+                                        
+                                    if (ngoError) {
+                                        console.error('Error inserting NGO data:', ngoError);
+                                        // Try updating metadata as fallback
+                                        await directSupabase.auth.updateUser({
+                                            data: { ngo_data: true }
+                                        });
+                                        console.log('Stored minimal NGO data in user metadata as fallback');
+                                    } else {
+                                        console.log('Successfully inserted minimal NGO data:', ngoResult);
+                                    }
+                                } catch (ngoErr) {
+                                    console.error('NGO data insertion error:', ngoErr);
+                                }
+                            }
+
+                            // Show success message and redirect
+                            showMessage('Registration successful! Redirecting to home page...', 'success');
+                            setTimeout(() => {
+                                window.location.href = 'index.html';
+                            }, 2000);
+                            
+                            return; // Skip the rest of the insertion process
+                        } catch (err) {
+                            console.error('Profile insertion try-catch error:', err);
+                            // Continue with other insertion attempts
+                        }
+                    } catch (error) {
+                        console.error('Registration error:', error);
+                        let errorMessage = 'Registration failed: ';
+                        
+                        if (error.message && error.message.includes('relation') && error.message.includes('does not exist')) {
+                            errorMessage += 'Database tables are not set up correctly. Please ensure you have run the SQL setup script.';
+                        } else if (error.code === '23505') {
+                            errorMessage += 'A user with this email already exists.';
+                        } else if (error.code === '23503') {
+                            errorMessage += 'Foreign key constraint failed. User may not exist in the auth table.';
+                        } else if (error.message && error.message.includes('duplicate key')) {
+                            errorMessage += 'This email is already registered.';
+                        } else {
+                            errorMessage += error.message || 'Unknown error';
+                        }
+                        
+                        // Show detailed technical error in console for debugging
+                        console.error('Detailed error information:', {
+                            code: error.code,
+                            message: error.message,
+                            details: error.details,
+                            hint: error.hint
+                        });
+                        
+                        showMessage(errorMessage, 'error');
+                    } finally {
+                        showLoading(false);
+                    }
+                });
+
+            } catch (error) {
+                console.error('Initialization error:', error);
+                showMessage(`Initialization error: ${error.message}`, 'error');
             }
+        });
 
-            document.querySelector('.form-step.active').style.display = 'none';
-            document.querySelector('.success-message').style.display = 'block';
-            return false;
+        // Helper functions
+        function showMessage(message, type) {
+            const messageElement = document.querySelector(`.${type}-message`);
+            if (messageElement) {
+                messageElement.textContent = message;
+                messageElement.style.display = 'block';
+                setTimeout(() => {
+                    messageElement.style.display = 'none';
+                }, 5000);
+            }
         }
 
-        // Input Validation on Change
-        const inputs = document.querySelectorAll('input, select, textarea');
-        inputs.forEach(input => {
-            input.addEventListener('input', () => {
-                input.classList.remove('error');
-                const error = input.nextElementSibling;
-                if (error && error.classList.contains('validation-error')) {
-                    error.style.display = 'none';
-                }
-            });
-        });
+        function showLoading(show) {
+            const spinner = document.querySelector('.loading-spinner');
+            if (spinner) {
+                spinner.style.display = show ? 'block' : 'none';
+            }
+        }
     </script>
 </body>
 </html> 

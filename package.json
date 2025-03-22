@@ -1,0 +1,25 @@
+{
+  "name": "404_brainnotfound_hacksphere2",
+  "version": "1.0.0",
+  "description": "Repo for Team 404 Brain Not Found",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server -p 8080 -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g1gasad/404_BrainNotFound_hacksphere2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/g1gasad/404_BrainNotFound_hacksphere2/issues"
+  },
+  "homepage": "https://github.com/g1gasad/404_BrainNotFound_hacksphere2#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "http-server": "^14.1.1"
+  }
+}
