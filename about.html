@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - MaterCare</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-sm);
+        }
+
+        .about-hero {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-xl) 0;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+                        url('images/about-bg.jpg') center/cover;
+            border-radius: var(--radius-lg);
+        }
+
+        .about-hero h1 {
+            color: var(--primary-color);
+            font-size: 4rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .about-hero p {
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.8rem;
+            line-height: 1.6;
+        }
+
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .mission-card, .vision-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .mission-card:hover, .vision-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            color: var(--primary-color);
+            font-size: 3rem;
+        }
+
+        .mission-card h2, .vision-card h2 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .mission-card p, .vision-card p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .impact-section {
+            background: var(--light-color);
+            padding: var(--spacing-xl) 0;
+            margin: var(--spacing-xl) 0;
+            border-radius: var(--radius-lg);
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .impact-item {
+            padding: var(--spacing-md);
+        }
+
+        .impact-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .impact-label {
+            color: var(--text-color);
+            font-size: 1.6rem;
+        }
+
+        .team-section {
+            margin: var(--spacing-xl) 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .team-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-image {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-info {
+            padding: var(--spacing-md);
+            text-align: center;
+        }
+
+        .team-info h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .team-role {
+            color: var(--tertiary-color);
+            font-size: 1.4rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .team-bio {
+            color: var(--text-color);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+
+        .team-social a {
+            width: 40px;
+            height: 40px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .team-social a:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .partners-section {
+            margin: var(--spacing-xl) 0;
+            text-align: center;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-lg);
+            align-items: center;
+            margin-top: var(--spacing-lg);
+        }
+
+        .partner-logo {
+            padding: var(--spacing-md);
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            transform: translateY(-5px);
+        }
+
+        .partner-logo img {
+            width: 100%;
+            height: auto;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .partner-logo:hover img {
+            filter: grayscale(0%);
+        }
+
+        .timeline-section {
+            margin: var(--spacing-xl) 0;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            padding: var(--spacing-lg) 0;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: var(--spacing-xl);
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: var(--spacing-xl);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-date {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .timeline-title {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .timeline-text {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            right: -10px;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 3rem;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: var(--spacing-xl);
+                padding-right: 0;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(odd) {
+                left: 0;
+                padding-right: 0;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-dot {
+                left: 22px;
+                right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MaterCare Logo">
+                <h1>MaterCare</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html" class="active">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <div class="language-selector">
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="fr">Français</option>
+                </select>
+            </div>
+            <div class="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-container">
+            <div class="about-hero">
+                <h1>About MaterCare</h1>
+                <p>Empowering mothers and healthcare providers to ensure safe, dignified maternal care for all communities.</p>
+            </div>
+
+            <div class="mission-vision">
+                <div class="mission-card">
+                    <div class="card-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h2>Our Mission</h2>
+                    <p>To bridge the gap in maternal healthcare by providing accessible, quality care and support to mothers in underprivileged communities through innovative technology and compassionate service.</p>
+                </div>
+
+                <div class="vision-card">
+                    <div class="card-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h2>Our Vision</h2>
+                    <p>A world where every mother has access to quality maternal healthcare, regardless of their socioeconomic status or geographical location.</p>
+                </div>
+            </div>
+
+            <section class="impact-section">
+                <div class="about-container">
+                    <h2 class="section-title">Our Impact</h2>
+                    <div class="impact-grid">
+                        <div class="impact-item">
+                            <div class="impact-number">50,000+</div>
+                            <div class="impact-label">Mothers Supported</div>
+                        </div>
+                        <div class="impact-item">
+                            <div class="impact-number">1,000+</div>
+                            <div class="impact-label">Healthcare Providers</div>
+                        </div>
+                        <div class="impact-item">
+                            <div class="impact-number">200+</div>
+                            <div class="impact-label">Communities Served</div>
+                        </div>
+                        <div class="impact-item">
+                            <div class="impact-number">98%</div>
+                            <div class="impact-label">Success Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="team-section">
+                <h2 class="section-title">Our Leadership Team</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="images/team-1.jpg" alt="Dr. Sarah Johnson">
+                        </div>
+                        <div class="team-info">
+                            <h3>Dr. Sarah Johnson</h3>
+                            <div class="team-role">Founder & CEO</div>
+                            <p class="team-bio">With over 15 years of experience in maternal healthcare, Dr. Johnson leads our mission to provide accessible care to all mothers.</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="images/team-2.jpg" alt="Dr. Michael Chen">
+                        </div>
+                        <div class="team-info">
+                            <h3>Dr. Michael Chen</h3>
+                            <div class="team-role">Medical Director</div>
+                            <p class="team-bio">Dr. Chen oversees our medical programs and ensures the highest standards of care for all our patients.</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="images/team-3.jpg" alt="Emily Rodriguez">
+                        </div>
+                        <div class="team-info">
+                            <h3>Emily Rodriguez</h3>
+                            <div class="team-role">Technology Director</div>
+                            <p class="team-bio">Emily leads our technology initiatives, ensuring seamless digital healthcare delivery to our communities.</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="timeline-section">
+                <h2 class="section-title">Our Journey</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2018</div>
+                            <h3 class="timeline-title">Foundation</h3>
+                            <p class="timeline-text">MaterCare was founded with a vision to bridge the maternal healthcare gap.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2019</div>
+                            <h3 class="timeline-title">First Community Program</h3>
+                            <p class="timeline-text">Launched our first community outreach program serving 50 mothers.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2020</div>
+                            <h3 class="timeline-title">Digital Platform Launch</h3>
+                            <p class="timeline-text">Introduced our telemedicine platform to reach remote communities.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2021</div>
+                            <h3 class="timeline-title">National Recognition</h3>
+                            <p class="timeline-text">Received national award for excellence in healthcare innovation.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2023</div>
+                            <h3 class="timeline-title">Global Expansion</h3>
+                            <p class="timeline-text">Expanded services to 200+ communities across multiple countries.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="partners-section">
+                <h2 class="section-title">Our Partners</h2>
+                <p>Working together to make maternal healthcare accessible to all.</p>
+                <div class="partners-grid">
+                    <div class="partner-logo">
+                        <img src="images/partner-1.png" alt="Partner 1">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/partner-2.png" alt="Partner 2">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/partner-3.png" alt="Partner 3">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/partner-4.png" alt="Partner 4">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/partner-5.png" alt="Partner 5">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="MaterCare Logo">
+                    <h3>MaterCare</h3>
+                    <p>Bridging the gap in maternal healthcare</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Support</a></li>
+                        <li><a href="health-tracker.html">Health Tracking</a></li>
+                        <li><a href="consultation.html">Consultation</a></li>
+                        <li><a href="resources.html">Educational Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope"></i> info@matercare.org</p>
+                    <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MaterCare. All rights reserved.</p>
+                <div class="footer-policies">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html> 

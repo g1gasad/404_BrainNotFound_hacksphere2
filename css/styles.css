@@ -291,7 +291,7 @@ section {
 .hero-content p {
     font-size: 1.8rem;
     margin-bottom: var(--spacing-md);
-    color: var(--tertiary-color);
+    color: rgb(238, 202, 237);
 }
 
 .hero-buttons {

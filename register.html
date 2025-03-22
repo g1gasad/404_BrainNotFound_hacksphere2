@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - MaterCare</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .register-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-sm);
+        }
+
+        .register-hero {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-xl) 0;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+                        url('images/register-bg.jpg') center/cover;
+            border-radius: var(--radius-lg);
+        }
+
+        .register-hero h1 {
+            color: var(--primary-color);
+            font-size: 4rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .register-hero p {
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.8rem;
+            line-height: 1.6;
+        }
+
+        .register-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .user-type-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            padding: var(--spacing-lg);
+            background: var(--light-color);
+        }
+
+        .user-type-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .user-type-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .user-type-card.active {
+            border-color: var(--primary-color);
+            background: var(--light-color);
+        }
+
+        .user-type-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            color: var(--primary-color);
+            font-size: 2.4rem;
+        }
+
+        .user-type-card.active .user-type-icon {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .user-type-card h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .user-type-card p {
+            color: var(--text-color);
+            font-size: 1.4rem;
+        }
+
+        .form-steps {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: white;
+            border-bottom: 1px solid var(--gray-color);
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-sm);
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .step-item.active .step-number {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .step-item.completed .step-number {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .form-content {
+            padding: var(--spacing-lg);
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: var(--spacing-sm);
+            border: 1px solid var(--gray-color);
+            border-radius: var(--radius-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .password-input {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: var(--spacing-sm);
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--tertiary-color);
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--spacing-lg);
+        }
+
+        .btn-prev {
+            background: var(--light-color);
+            color: var(--text-color);
+        }
+
+        .upload-area {
+            border: 2px dashed var(--gray-color);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-color);
+            background: var(--light-color);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .upload-text {
+            color: var(--text-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .upload-info {
+            color: var(--tertiary-color);
+            font-size: 1.4rem;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            display: none;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--success-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            color: white;
+            font-size: 3rem;
+        }
+
+        .success-title {
+            color: var(--success-color);
+            margin-bottom: var(--spacing-sm);
+            font-size: 2.4rem;
+        }
+
+        .success-text {
+            color: var(--text-color);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .validation-error {
+            color: var(--danger-color);
+            font-size: 1.4rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .register-hero h1 {
+                font-size: 3rem;
+            }
+
+            .form-steps {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            .form-buttons {
+                flex-direction: column-reverse;
+                gap: var(--spacing-sm);
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MaterCare Logo">
+                <h1>MaterCare</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <div class="language-selector">
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="fr">Français</option>
+                </select>
+            </div>
+            <div class="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Register Section -->
+    <section class="register-section">
+        <div class="register-container">
+            <div class="register-hero">
+                <h1>Join MaterCare</h1>
+                <p>Create your account to access comprehensive maternal healthcare services and support.</p>
+            </div>
+
+            <div class="register-form-container">
+                <div class="user-type-selection">
+                    <div class="user-type-card active" data-type="mother">
+                        <div class="user-type-icon">
+                            <i class="fas fa-female"></i>
+                        </div>
+                        <h3>Expectant Mother</h3>
+                        <p>Access healthcare services and track your pregnancy journey</p>
+                    </div>
+                    <div class="user-type-card" data-type="doctor">
+                        <div class="user-type-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3>Healthcare Provider</h3>
+                        <p>Provide care and support to expectant mothers</p>
+                    </div>
+                    <div class="user-type-card" data-type="ngo">
+                        <div class="user-type-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>NGO/Organization</h3>
+                        <p>Partner with us to extend maternal healthcare services</p>
+                    </div>
+                </div>
+
+                <div class="form-steps">
+                    <div class="step-item active">
+                        <div class="step-number">1</div>
+                        <span>Basic Info</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <span>Profile Details</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <span>Verification</span>
+                    </div>
+                </div>
+
+                <form id="registerForm" class="form-content" onsubmit="return validateForm()">
+                    <!-- Step 1: Basic Information -->
+                    <div class="form-step active" data-step="1">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                                <div class="validation-error">Please enter your first name</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                                <div class="validation-error">Please enter your last name</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                            <div class="validation-error">Please enter a valid email address</div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="password">Password *</label>
+                                <div class="password-input">
+                                    <input type="password" id="password" name="password" required>
+                                    <i class="fas fa-eye password-toggle"></i>
+                                </div>
+                                <div class="validation-error">Password must be at least 8 characters</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password *</label>
+                                <div class="password-input">
+                                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                                    <i class="fas fa-eye password-toggle"></i>
+                                </div>
+                                <div class="validation-error">Passwords do not match</div>
+                            </div>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-primary" onclick="nextStep(1)">Next Step</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Profile Details -->
+                    <div class="form-step" data-step="2">
+                        <!-- Mother-specific fields -->
+                        <div class="mother-fields">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="dueDate">Expected Due Date</label>
+                                    <input type="date" id="dueDate" name="dueDate">
+                                </div>
+                                <div class="form-group">
+                                    <label for="bloodGroup">Blood Group</label>
+                                    <select id="bloodGroup" name="bloodGroup">
+                                        <option value="">Select Blood Group</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="medicalHistory">Medical History</label>
+                                <textarea id="medicalHistory" name="medicalHistory" rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Doctor-specific fields -->
+                        <div class="doctor-fields" style="display: none;">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="specialization">Specialization *</label>
+                                    <select id="specialization" name="specialization">
+                                        <option value="">Select Specialization</option>
+                                        <option value="obstetrician">Obstetrician</option>
+                                        <option value="gynecologist">Gynecologist</option>
+                                        <option value="midwife">Midwife</option>
+                                        <option value="pediatrician">Pediatrician</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="experience">Years of Experience *</label>
+                                    <input type="number" id="experience" name="experience" min="0">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="licenseNumber">Medical License Number *</label>
+                                <input type="text" id="licenseNumber" name="licenseNumber">
+                            </div>
+                        </div>
+
+                        <!-- NGO-specific fields -->
+                        <div class="ngo-fields" style="display: none;">
+                            <div class="form-group">
+                                <label for="organizationName">Organization Name *</label>
+                                <input type="text" id="organizationName" name="organizationName">
+                            </div>
+                            <div class="form-group">
+                                <label for="registrationNumber">Registration Number *</label>
+                                <input type="text" id="registrationNumber" name="registrationNumber">
+                            </div>
+                            <div class="form-group">
+                                <label for="organizationType">Organization Type *</label>
+                                <select id="organizationType" name="organizationType">
+                                    <option value="">Select Type</option>
+                                    <option value="ngo">NGO</option>
+                                    <option value="hospital">Hospital</option>
+                                    <option value="clinic">Clinic</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-prev" onclick="prevStep(2)">Previous</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next Step</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Verification -->
+                    <div class="form-step" data-step="3">
+                        <div class="form-group">
+                            <label>Identity Verification</label>
+                            <div class="upload-area" onclick="triggerFileUpload('identity')">
+                                <i class="fas fa-id-card upload-icon"></i>
+                                <p class="upload-text">Upload ID Proof</p>
+                                <p class="upload-info">Supported formats: JPG, PNG, PDF (Max 5MB)</p>
+                                <input type="file" id="identityFile" style="display: none;" accept=".jpg,.png,.pdf">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Additional Documents</label>
+                            <div class="upload-area" onclick="triggerFileUpload('documents')">
+                                <i class="fas fa-file-upload upload-icon"></i>
+                                <p class="upload-text">Upload Supporting Documents</p>
+                                <p class="upload-info">Medical certificates, licenses, or registration documents</p>
+                                <input type="file" id="documentsFile" style="display: none;" accept=".jpg,.png,.pdf" multiple>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="termsAccept" required>
+                                I agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>
+                            </label>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-prev" onclick="prevStep(3)">Previous</button>
+                            <button type="submit" class="btn btn-primary">Complete Registration</button>
+                        </div>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div class="success-message">
+                        <div class="success-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h2 class="success-title">Registration Successful!</h2>
+                        <p class="success-text">Thank you for joining MaterCare. Please check your email to verify your account.</p>
+                        <a href="login.html" class="btn btn-primary">Proceed to Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="MaterCare Logo">
+                    <h3>MaterCare</h3>
+                    <p>Bridging the gap in maternal healthcare</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Support</a></li>
+                        <li><a href="health-tracker.html">Health Tracking</a></li>
+                        <li><a href="consultation.html">Consultation</a></li>
+                        <li><a href="resources.html">Educational Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope"></i> info@matercare.org</p>
+                    <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MaterCare. All rights reserved.</p>
+                <div class="footer-policies">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // User Type Selection
+        const userTypeCards = document.querySelectorAll('.user-type-card');
+        const motherFields = document.querySelector('.mother-fields');
+        const doctorFields = document.querySelector('.doctor-fields');
+        const ngoFields = document.querySelector('.ngo-fields');
+
+        userTypeCards.forEach(card => {
+            card.addEventListener('click', () => {
+                userTypeCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+
+                const userType = card.dataset.type;
+                motherFields.style.display = userType === 'mother' ? 'block' : 'none';
+                doctorFields.style.display = userType === 'doctor' ? 'block' : 'none';
+                ngoFields.style.display = userType === 'ngo' ? 'block' : 'none';
+            });
+        });
+
+        // Form Steps Navigation
+        function nextStep(currentStep) {
+            if (validateStep(currentStep)) {
+                document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+                document.querySelector(`[data-step="${currentStep + 1}"]`).classList.add('active');
+                
+                const steps = document.querySelectorAll('.step-item');
+                steps[currentStep - 1].classList.add('completed');
+                steps[currentStep].classList.add('active');
+            }
+        }
+
+        function prevStep(currentStep) {
+            document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+            document.querySelector(`[data-step="${currentStep - 1}"]`).classList.add('active');
+            
+            const steps = document.querySelectorAll('.step-item');
+            steps[currentStep - 1].classList.remove('active');
+            steps[currentStep - 2].classList.remove('completed');
+            steps[currentStep - 2].classList.add('active');
+        }
+
+        // Form Validation
+        function validateStep(step) {
+            let isValid = true;
+            const currentStep = document.querySelector(`[data-step="${step}"]`);
+
+            if (step === 1) {
+                const firstName = document.getElementById('firstName');
+                const lastName = document.getElementById('lastName');
+                const email = document.getElementById('email');
+                const password = document.getElementById('password');
+                const confirmPassword = document.getElementById('confirmPassword');
+
+                if (!firstName.value.trim()) {
+                    showError(firstName);
+                    isValid = false;
+                }
+
+                if (!lastName.value.trim()) {
+                    showError(lastName);
+                    isValid = false;
+                }
+
+                if (!email.value.trim() || !email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                    showError(email);
+                    isValid = false;
+                }
+
+                if (password.value.length < 8) {
+                    showError(password);
+                    isValid = false;
+                }
+
+                if (password.value !== confirmPassword.value) {
+                    showError(confirmPassword);
+                    isValid = false;
+                }
+            }
+
+            return isValid;
+        }
+
+        function showError(input) {
+            input.classList.add('error');
+            input.nextElementSibling.style.display = 'block';
+        }
+
+        // Password Toggle
+        const passwordToggles = document.querySelectorAll('.password-toggle');
+        passwordToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const input = toggle.previousElementSibling;
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    toggle.classList.remove('fa-eye');
+                    toggle.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    toggle.classList.remove('fa-eye-slash');
+                    toggle.classList.add('fa-eye');
+                }
+            });
+        });
+
+        // File Upload
+        function triggerFileUpload(type) {
+            document.getElementById(`${type}File`).click();
+        }
+
+        // Form Submission
+        function validateForm() {
+            if (!document.getElementById('termsAccept').checked) {
+                alert('Please accept the Terms of Service and Privacy Policy');
+                return false;
+            }
+
+            document.querySelector('.form-step.active').style.display = 'none';
+            document.querySelector('.success-message').style.display = 'block';
+            return false;
+        }
+
+        // Input Validation on Change
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                input.classList.remove('error');
+                const error = input.nextElementSibling;
+                if (error && error.classList.contains('validation-error')) {
+                    error.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

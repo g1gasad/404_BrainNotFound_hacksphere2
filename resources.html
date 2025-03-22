@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Resources - MaterCare</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .resources-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-sm);
+        }
+
+        .resources-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .resources-header h1 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+            font-size: 3.6rem;
+        }
+
+        .resources-header p {
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.8rem;
+        }
+
+        .resource-categories {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .category-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .resource-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .resource-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .resource-content {
+            padding: var(--spacing-md);
+        }
+
+        .resource-type {
+            display: inline-block;
+            padding: 5px 12px;
+            background: var(--light-color);
+            color: var(--primary-color);
+            border-radius: var(--radius-sm);
+            font-size: 1.4rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .resource-content h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+            font-size: 2rem;
+        }
+
+        .resource-content p {
+            color: var(--text-color);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--tertiary-color);
+            font-size: 1.4rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .resource-action {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .resource-btn {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .resource-btn.primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .resource-btn.secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .resource-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .video-resources {
+            background: var(--light-color);
+            padding: var(--spacing-xl) 0;
+            margin: var(--spacing-xl) 0;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .video-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-button i {
+            color: var(--primary-color);
+            font-size: 2.4rem;
+            margin-left: 5px;
+        }
+
+        .play-button:hover {
+            background: white;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-content {
+            padding: var(--spacing-md);
+        }
+
+        .video-content h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--tertiary-color);
+            font-size: 1.4rem;
+        }
+
+        .download-section {
+            margin: var(--spacing-xl) 0;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .download-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .download-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .download-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            color: var(--primary-color);
+            font-size: 3rem;
+        }
+
+        .download-content h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .download-content p {
+            color: var(--text-color);
+            margin-bottom: var(--spacing-md);
+            font-size: 1.4rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .faq-section {
+            margin: var(--spacing-xl) 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-md);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question h3 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .faq-question i {
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 var(--spacing-md) var(--spacing-md);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-item.active .faq-question {
+            background: var(--light-color);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .resources-header h1 {
+                font-size: 2.8rem;
+            }
+
+            .resources-header p {
+                font-size: 1.6rem;
+            }
+
+            .category-btn {
+                width: calc(50% - var(--spacing-sm));
+            }
+
+            .resource-action {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MaterCare Logo">
+                <h1>MaterCare</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="resources.html" class="active">Resources</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <div class="language-selector">
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="fr">Français</option>
+                </select>
+            </div>
+            <div class="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Resources Section -->
+    <section class="resources-section">
+        <div class="resources-container">
+            <div class="resources-header">
+                <h1>Educational Resources</h1>
+                <p>Access comprehensive educational materials to support your maternal health journey.</p>
+            </div>
+
+            <div class="resource-categories">
+                <button class="category-btn active">All Resources</button>
+                <button class="category-btn">Pregnancy Guides</button>
+                <button class="category-btn">Nutrition</button>
+                <button class="category-btn">Mental Health</button>
+                <button class="category-btn">Exercise</button>
+                <button class="category-btn">Childbirth</button>
+            </div>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-image">
+                        <img src="images/pregnancy-guide.jpg" alt="Pregnancy Guide">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-type">Guide</span>
+                        <h3>Complete Pregnancy Guide</h3>
+                        <p>A comprehensive guide covering all aspects of pregnancy from conception to delivery.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-clock"></i> 30 min read</span>
+                            <span><i class="fas fa-download"></i> 5k downloads</span>
+                        </div>
+                        <div class="resource-action">
+                            <a href="#" class="resource-btn primary">Read Now</a>
+                            <a href="#" class="resource-btn secondary">Download PDF</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-image">
+                        <img src="images/nutrition-guide.jpg" alt="Nutrition Guide">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-type">Nutrition</span>
+                        <h3>Pregnancy Nutrition Guide</h3>
+                        <p>Essential nutrition guidelines and meal plans for a healthy pregnancy.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-clock"></i> 20 min read</span>
+                            <span><i class="fas fa-download"></i> 3.2k downloads</span>
+                        </div>
+                        <div class="resource-action">
+                            <a href="#" class="resource-btn primary">Read Now</a>
+                            <a href="#" class="resource-btn secondary">Download PDF</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-image">
+                        <img src="images/exercise-guide.jpg" alt="Exercise Guide">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-type">Exercise</span>
+                        <h3>Safe Pregnancy Exercises</h3>
+                        <p>Safe and effective exercise routines for each trimester of pregnancy.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-clock"></i> 15 min read</span>
+                            <span><i class="fas fa-download"></i> 2.8k downloads</span>
+                        </div>
+                        <div class="resource-action">
+                            <a href="#" class="resource-btn primary">Read Now</a>
+                            <a href="#" class="resource-btn secondary">Download PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Resources Section -->
+            <section class="video-resources">
+                <div class="resources-container">
+                    <div class="resources-header">
+                        <h2>Video Resources</h2>
+                        <p>Watch educational videos from healthcare professionals.</p>
+                    </div>
+
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="images/prenatal-video.jpg" alt="Prenatal Care Video">
+                                <div class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-content">
+                                <h3>Understanding Prenatal Care</h3>
+                                <div class="video-meta">
+                                    <span><i class="fas fa-clock"></i> 15:30</span>
+                                    <span><i class="fas fa-eye"></i> 10k views</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="images/nutrition-video.jpg" alt="Nutrition Video">
+                                <div class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-content">
+                                <h3>Healthy Eating During Pregnancy</h3>
+                                <div class="video-meta">
+                                    <span><i class="fas fa-clock"></i> 12:45</span>
+                                    <span><i class="fas fa-eye"></i> 8.5k views</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="images/exercise-video.jpg" alt="Exercise Video">
+                                <div class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-content">
+                                <h3>Safe Pregnancy Exercises</h3>
+                                <div class="video-meta">
+                                    <span><i class="fas fa-clock"></i> 20:15</span>
+                                    <span><i class="fas fa-eye"></i> 7.2k views</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Downloadable Resources Section -->
+            <section class="download-section">
+                <div class="resources-header">
+                    <h2>Downloadable Resources</h2>
+                    <p>Access our collection of downloadable materials.</p>
+                </div>
+
+                <div class="download-grid">
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="download-content">
+                            <h3>Pregnancy Checklist</h3>
+                            <p>A comprehensive checklist for each trimester</p>
+                            <a href="#" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="download-content">
+                            <h3>Nutrition Guide</h3>
+                            <p>Weekly meal plans and nutrition tips</p>
+                            <a href="#" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-file-medical"></i>
+                        </div>
+                        <div class="download-content">
+                            <h3>Health Record Template</h3>
+                            <p>Track your pregnancy journey</p>
+                            <a href="#" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-book-medical"></i>
+                        </div>
+                        <div class="download-content">
+                            <h3>Birth Plan Template</h3>
+                            <p>Plan your ideal birthing experience</p>
+                            <a href="#" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <div class="resources-header">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Find answers to common questions about maternal health.</p>
+                </div>
+
+                <div class="faq-container">
+                    <div class="faq-item active">
+                        <div class="faq-question">
+                            <h3>When should I start prenatal care?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>It's recommended to start prenatal care as soon as you know you're pregnant, ideally within the first 8 weeks of pregnancy. Early prenatal care is crucial for monitoring your health and your baby's development.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What vitamins should I take during pregnancy?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Essential prenatal vitamins include folic acid, iron, calcium, and vitamin D. Consult with your healthcare provider for personalized recommendations based on your specific needs.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Is it safe to exercise during pregnancy?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, moderate exercise is generally safe and beneficial during pregnancy. However, always consult with your healthcare provider before starting any exercise routine and follow safe pregnancy exercise guidelines.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What foods should I avoid during pregnancy?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Avoid raw or undercooked meat, unpasteurized dairy products, certain types of fish high in mercury, and unwashed fruits and vegetables. Consult our nutrition guide for a complete list of foods to avoid.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="MaterCare Logo">
+                    <h3>MaterCare</h3>
+                    <p>Bridging the gap in maternal healthcare</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Support</a></li>
+                        <li><a href="health-tracker.html">Health Tracking</a></li>
+                        <li><a href="consultation.html">Consultation</a></li>
+                        <li><a href="resources.html">Educational Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope"></i> info@matercare.org</p>
+                    <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MaterCare. All rights reserved.</p>
+                <div class="footer-policies">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // FAQ Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all FAQ items
+                    faqItems.forEach(faq => faq.classList.remove('active'));
+                    
+                    // Open clicked item if it wasn't active
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+            // Resource Category Filtering
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    // Add filtering functionality here
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -13,16 +13,21 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <img src="images/logo.png" alt="MaterCare Logo">
+                
                 <h1>MaterCare</h1>
             </div>
             <nav class="nav">
                 <ul>
+                    <li></li>
                     <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="resources.html">Resources</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <li><a href="emergency.html">Emergency</a></li>
+                    <li><a href="health-tracker.html">Health Tracker</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li></li>
                 </ul>
             </nav>
             <div class="auth-buttons">
@@ -46,19 +51,48 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Bridging the Gap in Maternal Healthcare</h1>
-                <p>Empowering underprivileged communities with accessible prenatal and emergency care services</p>
-                <div class="hero-buttons">
-                    <a href="#emergency" class="btn btn-danger">Emergency Support</a>
-                    <a href="#tracking" class="btn btn-secondary">Health Tracking</a>
-                    <a href="#resources" class="btn btn-tertiary">Educational Resources</a>
-                </div>
+    <section class="hero-section">
+        <div class="hero-image-container">
+            <div class="hero-image active" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5f088a46ebe405013044f1a4/ea1bf4b2-1193-4bf7-821b-d3d4b735b6d4/woman_holding_child.jpg?format=1500w')"></div>
+            <div class="hero-image" style="background-image: url('https://drshwetashah.com/wp-content/uploads/2024/02/Know-All-About-Pregnancy-and-Prenatal-Care-1080x458.webp')"></div>
+            <div class="hero-image" style="background-image: url('https://media.licdn.com/dms/image/v2/D4E12AQHfGKQwV_qmaA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1692301368837?e=1747872000&v=beta&t=kpzSYY-ivE9J_QHQfJFIKdvMGpl007YeP2NVJCGNqDY')"></div>
+            <div class="hero-image" style="background-image: url('https://www.ibanet.org/medias/maternity-rates-and-race-header.png?context=bWFzdGVyfGltYWdlc3w4MTE5NzZ8aW1hZ2UvcG5nfGFHUTVMMmcxTVM4NU1EUTRNVFEwT0RNNE5qZzJMMjFoZEdWeWJtbDBlU0J5WVhSbGN5QmhibVFnY21GalpTQm9aV0ZrWlhJdWNHNW58ODIwZGFhMjM0NTk1NGE3MWY0MjYyNjFkYzQ0NjE3ODIzZGU0ODMxYWFjM2ExNjQ2MzgxNDRkMTI1OTJhMWQ1Ng')"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Bridging the Gap in Maternal Healthcare</h1>
+            <p>Empowering underprivileged communities with accessible prenatal and emergency care services</p>
+            <div class="hero-buttons">
+                <a href="emergency.html" class="btn btn-danger">Emergency Support</a>
+                <a href="health-tracker.html" class="btn btn-secondary">Health Tracking</a>
+                <a href="resources.html" class="btn btn-tertiary">Educational Resources</a>
             </div>
-            <div class="hero-image">
-                <img src="images/hero-image.jpg" alt="Mother and healthcare professional">
+        </div>
+    </section>
+
+    <section class="statistics" id="statistics">
+        <div class="container">
+            <h2>Maternal Healthcare Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat">
+                    <i class="fas fa-baby"></i>
+                    <h3 id="birthRate">0</h3>
+                    <p>Birth Rate per 1,000 Women</p>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-user-nurse"></i>
+                    <h3 id="pregnantWomen">0</h3>
+                    <p>Pregnant Women Receiving Care</p>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3 id="maternalMortality">0</h3>
+                    <p>Maternal Mortality Rate</p>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-child"></i>
+                    <h3 id="infantMortality">0</h3>
+                    <p>Infant Mortality Rate</p>
+                </div>
             </div>
         </div>
     </section>
@@ -279,5 +313,215 @@
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Hero Image Transition
+        const images = document.querySelectorAll('.hero-image');
+        let currentImage = 0;
+
+        function showNextImage() {
+            images[currentImage].classList.remove('active');
+            currentImage = (currentImage + 1) % images.length;
+            images[currentImage].classList.add('active');
+        }
+
+        // Change image every 3 seconds
+        setInterval(showNextImage, 3000);
+
+        // Statistics Counter
+        const statsData = {
+            birthRate: 18.5,
+            pregnantWomen: 240000,
+            maternalMortality: 152,
+            infantMortality: 32
+        };
+
+        const elements = {
+            birthRate: document.getElementById("birthRate"),
+            pregnantWomen: document.getElementById("pregnantWomen"),
+            maternalMortality: document.getElementById("maternalMortality"),
+            infantMortality: document.getElementById("infantMortality")
+        };
+
+        function animateCount(element, start, end, duration) {
+            if (!element) return; // Guard clause for null elements
+            
+            let startTime = null;
+            const formatNumber = (num) => {
+                if (num >= 1000) {
+                    return num.toLocaleString();
+                }
+                // For decimal numbers (like birth rate)
+                return num.toFixed(1);
+            };
+
+            function updateCounter(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const progress = Math.min((currentTime - startTime) / duration, 1);
+                const currentValue = progress * (end - start) + start;
+                element.textContent = formatNumber(currentValue);
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+
+            requestAnimationFrame(updateCounter);
+        }
+
+        function startCounting() {
+            animateCount(elements.birthRate, 0, statsData.birthRate, 2000);
+            animateCount(elements.pregnantWomen, 0, statsData.pregnantWomen, 3000);
+            animateCount(elements.maternalMortality, 0, statsData.maternalMortality, 2500);
+            animateCount(elements.infantMortality, 0, statsData.infantMortality, 2500);
+        }
+
+        // Using Intersection Observer for statistics section
+        const statsSection = document.getElementById("statistics");
+        if (statsSection) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        startCounting();
+                        observer.disconnect(); // Stop observing after animation starts
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(statsSection);
+        }
+    });
+    </script>
+
+    <style>
+    .hero-section {
+        position: relative;
+        height: 80vh;
+        min-height: 600px;
+        overflow: hidden;
+    }
+
+    .hero-image-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .hero-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.5s ease-in-out;
+    }
+
+    .hero-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
+    }
+
+    .hero-image.active {
+        opacity: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--spacing-xl) var(--spacing-lg);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+    }
+
+    .hero-content h1 {
+        font-size: 4.5rem;
+        font-weight: 700;
+        margin-bottom: var(--spacing-md);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-content p {
+        font-size: 2rem;
+        max-width: 800px;
+        margin-bottom: var(--spacing-lg);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: var(--spacing-md);
+    }
+
+    @media (max-width: 768px) {
+        .hero-content h1 {
+            font-size: 3rem;
+        }
+
+        .hero-content p {
+            font-size: 1.6rem;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+    }
+
+    .statistics {
+    padding: 50px 0;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+.stat {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.stat i {
+    font-size: 40px;
+    color: #ff6b6b;
+}
+
+.stat h3 {
+    font-size: 28px;
+    color: #333;
+}
+
+.stat p {
+    font-size: 16px;
+    color: #666;
+}
+
+
+
+
+    </style>
 </body>
 </html> 

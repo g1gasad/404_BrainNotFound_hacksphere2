@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - MaterCare</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-sm);
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .services-header h1 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+            font-size: 3.6rem;
+        }
+
+        .services-header p {
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.8rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .service-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            padding: var(--spacing-md);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -30px auto 20px;
+            position: relative;
+            z-index: 1;
+            color: white;
+            font-size: 2.4rem;
+            box-shadow: 0 4px 15px rgba(92, 158, 173, 0.3);
+        }
+
+        .service-content h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+            font-size: 2rem;
+        }
+
+        .service-content p {
+            color: var(--text-color);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-color);
+        }
+
+        .service-features li i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .service-action {
+            text-align: center;
+        }
+
+        .service-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .service-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .testimonials {
+            background: linear-gradient(to right, var(--primary-color), var(--tertiary-color));
+            padding: var(--spacing-xl) 0;
+            margin: var(--spacing-xl) 0;
+            color: white;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .testimonial-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto var(--spacing-md);
+            overflow: hidden;
+            border: 3px solid white;
+        }
+
+        .testimonial-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-role {
+            font-size: 1.4rem;
+            opacity: 0.8;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: var(--spacing-xl) 0;
+            background: var(--light-color);
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        .cta-title {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+            font-size: 3rem;
+        }
+
+        .cta-text {
+            color: var(--text-color);
+            margin-bottom: var(--spacing-lg);
+            font-size: 1.8rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+        }
+
+        .cta-btn {
+            padding: 15px 30px;
+            border-radius: var(--radius-md);
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn.primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .services-header h1 {
+                font-size: 2.8rem;
+            }
+
+            .services-header p {
+                font-size: 1.6rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .cta-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MaterCare Logo">
+                <h1>MaterCare</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <div class="language-selector">
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="fr">Français</option>
+                </select>
+            </div>
+            <div class="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="services-container">
+            <div class="services-header">
+                <h1>Our Comprehensive Services</h1>
+                <p>Providing quality maternal healthcare services to ensure the well-being of mothers and their babies throughout their journey.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/prenatal-care.jpg" alt="Prenatal Care">
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-baby"></i>
+                        </div>
+                        <h3>Prenatal Care</h3>
+                        <p>Comprehensive prenatal care services to ensure a healthy pregnancy journey.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Regular check-ups</li>
+                            <li><i class="fas fa-check"></i> Ultrasound monitoring</li>
+                            <li><i class="fas fa-check"></i> Nutritional guidance</li>
+                            <li><i class="fas fa-check"></i> Risk assessment</li>
+                        </ul>
+                        <div class="service-action">
+                            <a href="#" class="service-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/emergency-care.jpg" alt="Emergency Care">
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-ambulance"></i>
+                        </div>
+                        <h3>Emergency Support</h3>
+                        <p>24/7 emergency care services for maternal health emergencies.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> 24/7 helpline</li>
+                            <li><i class="fas fa-check"></i> Ambulance service</li>
+                            <li><i class="fas fa-check"></i> Emergency response</li>
+                            <li><i class="fas fa-check"></i> Critical care</li>
+                        </ul>
+                        <div class="service-action">
+                            <a href="emergency.html" class="service-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/telemedicine.jpg" alt="Telemedicine">
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Telemedicine</h3>
+                        <p>Virtual consultations with healthcare professionals from the comfort of your home.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Video consultations</li>
+                            <li><i class="fas fa-check"></i> Remote monitoring</li>
+                            <li><i class="fas fa-check"></i> Digital prescriptions</li>
+                            <li><i class="fas fa-check"></i> Follow-up care</li>
+                        </ul>
+                        <div class="service-action">
+                            <a href="#" class="service-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/mental-health.jpg" alt="Mental Health">
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Mental Health Support</h3>
+                        <p>Professional mental health services for maternal well-being.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Counseling sessions</li>
+                            <li><i class="fas fa-check"></i> Support groups</li>
+                            <li><i class="fas fa-check"></i> Stress management</li>
+                            <li><i class="fas fa-check"></i> Depression screening</li>
+                        </ul>
+                        <div class="service-action">
+                            <a href="#" class="service-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/education.jpg" alt="Education">
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h3>Educational Resources</h3>
+                        <p>Comprehensive educational materials for maternal health awareness.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Online courses</li>
+                            <li><i class="fas fa-check"></i> Workshops</li>
+                            <li><i class="fas fa-check"></i> Digital library</li>
+                            <li><i class="fas fa-check"></i> Expert articles</li>
+                        </ul>
+                        <div class="service-action">
+                            <a href="resources.html" class="service-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/community.jpg" alt="Community Support">
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Community Support</h3>
+                        <p>Connect with other mothers and healthcare professionals in our community.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Discussion forums</li>
+                            <li><i class="fas fa-check"></i> Support groups</li>
+                            <li><i class="fas fa-check"></i> Expert Q&A</li>
+                            <li><i class="fas fa-check"></i> Success stories</li>
+                        </ul>
+                        <div class="service-action">
+                            <a href="#" class="service-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonials Section -->
+            <section class="testimonials">
+                <div class="testimonials-container">
+                    <div class="testimonials-header">
+                        <h2>What Our Users Say</h2>
+                    </div>
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card">
+                            <div class="testimonial-image">
+                                <img src="images/testimonial-1.jpg" alt="Sarah Johnson">
+                            </div>
+                            <div class="testimonial-content">
+                                "The prenatal care services provided by MaterCare have been exceptional. The doctors are very attentive and the 24/7 support gives me peace of mind."
+                            </div>
+                            <div class="testimonial-author">Sarah Johnson</div>
+                            <div class="testimonial-role">First-time Mother</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-image">
+                                <img src="images/testimonial-2.jpg" alt="Dr. Emily Chen">
+                            </div>
+                            <div class="testimonial-content">
+                                "As a healthcare provider, I'm impressed by MaterCare's commitment to providing comprehensive maternal care services to underserved communities."
+                            </div>
+                            <div class="testimonial-author">Dr. Emily Chen</div>
+                            <div class="testimonial-role">Obstetrician</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-image">
+                                <img src="images/testimonial-3.jpg" alt="Maria Rodriguez">
+                            </div>
+                            <div class="testimonial-content">
+                                "The telemedicine service has been a lifesaver. I can consult with doctors from home, which is especially helpful during my high-risk pregnancy."
+                            </div>
+                            <div class="testimonial-author">Maria Rodriguez</div>
+                            <div class="testimonial-role">Expectant Mother</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action Section -->
+            <section class="cta-section">
+                <div class="cta-container">
+                    <h2 class="cta-title">Ready to Get Started?</h2>
+                    <p class="cta-text">Join our community of mothers and healthcare providers to access comprehensive maternal care services.</p>
+                    <div class="cta-buttons">
+                        <a href="register.html" class="cta-btn primary">Register Now</a>
+                        <a href="contact.html" class="cta-btn secondary">Contact Us</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="MaterCare Logo">
+                    <h3>MaterCare</h3>
+                    <p>Bridging the gap in maternal healthcare</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Support</a></li>
+                        <li><a href="health-tracker.html">Health Tracking</a></li>
+                        <li><a href="consultation.html">Consultation</a></li>
+                        <li><a href="resources.html">Educational Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope"></i> info@matercare.org</p>
+                    <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MaterCare. All rights reserved.</p>
+                <div class="footer-policies">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html> 
