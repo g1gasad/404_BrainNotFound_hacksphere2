@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaterCare - Maternal Healthcare Platform</title>
+    <title>GarbhSeva</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -53,8 +53,8 @@
             <div class="hero-image" style="background-image: url('https://www.ibanet.org/medias/maternity-rates-and-race-header.png?context=bWFzdGVyfGltYWdlc3w4MTE5NzZ8aW1hZ2UvcG5nfGFHUTVMMmcxTVM4NU1EUTRNVFEwT0RNNE5qZzJMMjFoZEdWeWJtbDBlU0J5WVhSbGN5QmhibVFnY21GalpTQm9aV0ZrWlhJdWNHNW58ODIwZGFhMjM0NTk1NGE3MWY0MjYyNjFkYzQ0NjE3ODIzZGU0ODMxYWFjM2ExNjQ2MzgxNDRkMTI1OTJhMWQ1Ng')"></div>
         </div>
         <div class="hero-content">
-            <h1>Bridging the Gap in Maternal Healthcare</h1>
-            <p>Empowering underprivileged communities with accessible prenatal and emergency care services</p>
+            <h1>PRANA: Bridging the Gap in Maternal Healthcare</h1>
+            <p>India accounts for 17.3% of global stillbirths </p>
             <div class="hero-buttons">
                 <a href="emergency.html" class="btn btn-danger">Emergency Support</a>
                 <a href="health-tracker.html" class="btn btn-secondary">Health Tracking</a>
@@ -67,30 +67,60 @@
         <div class="container">
             <h2>Maternal Healthcare Statistics</h2>
             <div class="stats-grid">
-                <div class="stat">
-                    <i class="fas fa-baby"></i>
-                    <h3 id="birthRate">0</h3>
-                    <p>Birth Rate per 1,000 Women</p>
-                </div>
-                <div class="stat">
-                    <i class="fas fa-user-nurse"></i>
-                    <h3 id="pregnantWomen">0</h3>
-                    <p>Pregnant Women Receiving Care</p>
-                </div>
+                <!-- Row 1 -->
                 <div class="stat">
                     <i class="fas fa-heartbeat"></i>
-                    <h3 id="maternalMortality">0</h3>
-                    <p>Maternal Mortality Rate</p>
+                    <h3 id="maternalMortality">152</h3>
+                    <p>Maternal Mortality Rate (MMR)</p>
+                    <small>Target: Below 70 per 100,000 live births</small>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-baby"></i>
+                    <h3 id="birthRate">18.5</h3>
+                    <p>Birth Rate per 1,000 Women</p>
+                    <small>Down from 21.8 in 2015</small>
                 </div>
                 <div class="stat">
                     <i class="fas fa-child"></i>
-                    <h3 id="infantMortality">0</h3>
-                    <p>Infant Mortality Rate</p>
+                    <h3 id="pregnancyLossRate">11.1%</h3>
+                    <p>Pregnancy Loss Rate</p>
+                    <small>Increased from 9.8% (2015) to 11.1% (2021)</small>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3 id="miscarriageRate">6.9%</h3>
+                    <p>Miscarriage Rate</p>
+                    <small>Increased from 5.3% (2015) to 6.9% (2021) in rural areas</small>
+                </div>
+    
+                <!-- Row 2 -->
+                <div class="stat">
+                    <i class="fas fa-procedures"></i>
+                    <h3 id="stillbirthRate">28.6%</h3>
+                    <p>Stillbirth Rate</p>
+                    <small>Increased by 28.6% (2015–2021)</small>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-venus-mars"></i>
+                    <h3 id="teenageAbortions">8.0%</h3>
+                    <p>Teenage Abortions</p>
+                    <small> Increased 11x in Telangana (0.7% → 8.0%)</small>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-user-md"></i>
+                    <h3 id="prenatalCareGap">58%</h3>
+                    <p>Prenatal Care Gap</p>
+                    <small> Only 58% of mothers received the recommended 4 ANC visits</small>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-hospital"></i>
+                    <h3 id="neonatalCare">72%</h3>
+                    <p>Neonatal Care Access</p>
+                    <small>Only 72% of newborns receive essential postnatal care</small>
                 </div>
             </div>
         </div>
     </section>
-    
     
     
     <!-- Quick Access Section -->
@@ -251,7 +281,6 @@
                 <p>Be part of our mission to improve maternal healthcare accessibility for all</p>
                 <div class="cta-buttons">
                     <a href="register.html" class="btn btn-primary">Register Now</a>
-                    <a href="volunteer.html" class="btn btn-outline">Volunteer With Us</a>
                 </div>
             </div>
         </div>
@@ -263,7 +292,7 @@
             <div class="footer-grid">
                 <div class="footer-logo">
                     
-                    <h3>MaterCare</h3>
+                    <h3>GarbhSeva</h3>
                     <p>Bridging the gap in maternal healthcare</p>
                 </div>
                 <div class="footer-links">
@@ -310,83 +339,67 @@
     <!-- Scripts -->
     <script src="js/main.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Hero Image Transition
-        const images = document.querySelectorAll('.hero-image');
-        let currentImage = 0;
+    document.addEventListener("DOMContentLoaded", function () {
+    const statsData = {
+        maternalMortality: 152,
+        birthRate: 18.5,
+        pregnancyLossRate: 11.1,
+        miscarriageRate: 6.9,
+        stillbirthRate: 28.6,
+        teenageAbortions: 8.0,
+        prenatalCareGap: 58,
+        neonatalCare: 72
+    };
 
-        function showNextImage() {
-            images[currentImage].classList.remove('active');
-            currentImage = (currentImage + 1) % images.length;
-            images[currentImage].classList.add('active');
-        }
+    const elements = {
+        maternalMortality: document.getElementById("maternalMortality"),
+        birthRate: document.getElementById("birthRate"),
+        pregnancyLossRate: document.getElementById("pregnancyLossRate"),
+        miscarriageRate: document.getElementById("miscarriageRate"),
+        stillbirthRate: document.getElementById("stillbirthRate"),
+        teenageAbortions: document.getElementById("teenageAbortions"),
+        prenatalCareGap: document.getElementById("prenatalCareGap"),
+        neonatalCare: document.getElementById("neonatalCare")
+    };
 
-        // Change image every 3 seconds
-        setInterval(showNextImage, 3000);
+    function animateCount(element, start, end, duration) {
+        if (!element) return; 
 
-        // Statistics Counter
-        const statsData = {
-            birthRate: 18.5,
-            pregnantWomen: 240000,
-            maternalMortality: 152,
-            infantMortality: 32
-        };
-
-        const elements = {
-            birthRate: document.getElementById("birthRate"),
-            pregnantWomen: document.getElementById("pregnantWomen"),
-            maternalMortality: document.getElementById("maternalMortality"),
-            infantMortality: document.getElementById("infantMortality")
-        };
-
-        function animateCount(element, start, end, duration) {
-            if (!element) return; // Guard clause for null elements
-            
-            let startTime = null;
-            const formatNumber = (num) => {
-                if (num >= 1000) {
-                    return num.toLocaleString();
-                }
-                // For decimal numbers (like birth rate)
-                return num.toFixed(1);
-            };
-
-            function updateCounter(currentTime) {
-                if (!startTime) startTime = currentTime;
-                const progress = Math.min((currentTime - startTime) / duration, 1);
-                const currentValue = progress * (end - start) + start;
-                element.textContent = formatNumber(currentValue);
-
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                }
+        let startTime = null;
+        function updateCounter(currentTime) {
+            if (!startTime) startTime = currentTime;
+            const progress = Math.min((currentTime - startTime) / duration, 1);
+            element.textContent = Math.floor(progress * (end - start) + start);
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
             }
-
-            requestAnimationFrame(updateCounter);
         }
+        requestAnimationFrame(updateCounter);
+    }
 
-        function startCounting() {
-            animateCount(elements.birthRate, 0, statsData.birthRate, 2000);
-            animateCount(elements.pregnantWomen, 0, statsData.pregnantWomen, 3000);
-            animateCount(elements.maternalMortality, 0, statsData.maternalMortality, 2500);
-            animateCount(elements.infantMortality, 0, statsData.infantMortality, 2500);
-        }
+    function startCounting() {
+        Object.keys(statsData).forEach(stat => {
+            animateCount(elements[stat], 0, statsData[stat], 2000);
+        });
+    }
 
-        // Using Intersection Observer for statistics section
-        const statsSection = document.getElementById("statistics");
-        if (statsSection) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        startCounting();
-                        observer.disconnect(); // Stop observing after animation starts
-                    }
-                });
-            }, { threshold: 0.5 });
+    // Trigger animation when visible
+    const statsSection = document.getElementById("statistics");
+    if (statsSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    startCounting();
+                    observer.disconnect(); // Stop observing after animation starts
+                }
+            });
+        }, { threshold: 0.5 });
 
-            observer.observe(statsSection);
-        }
-    });
+        observer.observe(statsSection);
+    }
+});
+
+
     </script>
 
     <style>
@@ -479,7 +492,9 @@
         }
     }
 
-    .statistics {
+    /* Statistics Section */
+/* Statistics Section */
+.statistics {
     padding: 50px 0;
     background: #f9f9f9;
     text-align: center;
@@ -487,17 +502,19 @@
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, 1fr); /* 4 columns per row */
     gap: 20px;
     justify-content: center;
 }
 
+/* Styling for Each Box */
 .stat {
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
+    text-align: center;
 }
 
 .stat i {
@@ -513,11 +530,37 @@
 .stat p {
     font-size: 16px;
     color: #666;
+    font-weight: bold;
 }
 
+.stat small {
+    display: block;
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Hover Effect */
+.stat:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns per row on tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(1, 1fr); /* 1 column per row on mobile */
+    }
+}
 
 
 
     </style>
 </body>
-</html> 
+</html>
